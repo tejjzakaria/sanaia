@@ -1,0 +1,688 @@
+"use client";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useLanguage } from "../../context/LanguageContext";
+import { PRODUCTS, type Product } from "../../data/products";
+
+/* ─── Icons ─────────────────────────────────────────────────────────────── */
+
+function CheckIcon({ color }: { color: string }) {
+  return (
+    <svg
+      className="w-4 h-4 flex-shrink-0"
+      viewBox="0 0 16 12"
+      fill="none"
+      stroke={color}
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M1 6l4 5 10-10" />
+    </svg>
+  );
+}
+
+function StarIcon() {
+  return (
+    <svg className="w-5 h-5 text-amber-400 fill-amber-400" viewBox="0 0 20 20">
+      <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+    </svg>
+  );
+}
+
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      className={`w-5 h-5 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M5 8l5 5 5-5" />
+    </svg>
+  );
+}
+
+function SpinnerIcon() {
+  return (
+    <svg
+      className="w-5 h-5 animate-spin"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+    >
+      <circle className="opacity-25" cx="12" cy="12" r="10" strokeWidth="4" />
+      <path className="opacity-75" d="M4 12a8 8 0 018-8" />
+    </svg>
+  );
+}
+
+/* ─── Validation ─────────────────────────────────────────────────────────── */
+
+const PHONE_RE = /^(0[67]\d{8}|\+?212[67]\d{8})$/;
+
+function validateForm(form: {
+  name: string;
+  phone: string;
+  city: string;
+  address: string;
+}) {
+  const errors: Record<string, string> = {};
+  if (!form.name.trim() || form.name.trim().length < 3) {
+    errors.name = "Champ requis (min 3 caractères)";
+  }
+  const cleanPhone = form.phone.replace(/[\s\-]/g, "");
+  if (!PHONE_RE.test(cleanPhone)) {
+    errors.phone = "Numéro invalide (ex: 0612345678)";
+  }
+  if (!form.city.trim()) {
+    errors.city = "Champ requis";
+  }
+  if (!form.address.trim() || form.address.trim().length < 5) {
+    errors.address = "Champ requis (min 5 caractères)";
+  }
+  return errors;
+}
+
+/* ─── Main component ─────────────────────────────────────────────────────── */
+
+export default function ProductDetail({ product }: { product: Product }) {
+  const { lang, t } = useLanguage();
+  const item = lang === "ar" ? product.ar : product.fr;
+  const router = useRouter();
+
+  const [activeImg, setActiveImg] = useState(0);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [qty, setQty] = useState(1);
+  const [form, setForm] = useState({ name: "", phone: "", city: "", address: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [formError, setFormError] = useState<string | null>(null);
+  const [status, setStatus] = useState<"idle" | "submitting">("idle");
+
+  // Split howToUse by periods for numbered steps
+  const steps = item.howToUse
+    .split(".")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  const subtotal = parseInt(product.price) * qty;
+
+  const relatedProducts = PRODUCTS.filter((p) => p.id !== product.id).slice(0, 3);
+
+  function handleQty(delta: number) {
+    setQty((prev) => Math.min(10, Math.max(1, prev + delta)));
+  }
+
+  function handleField(field: string, value: string) {
+    setForm((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => {
+        const next = { ...prev };
+        delete next[field];
+        return next;
+      });
+    }
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const errs = validateForm(form);
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      return;
+    }
+    setStatus("submitting");
+    setFormError(null);
+
+    try {
+      const res = await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          product: product.fr.name,
+          productAr: product.ar.name,
+          qty,
+          unitPrice: product.price,
+          total: `${subtotal} DH`,
+          name: form.name,
+          phone: form.phone,
+          city: form.city,
+          address: form.address,
+          submittedAt: new Date().toISOString(),
+        }),
+      });
+
+      if (!res.ok) throw new Error("failed");
+
+      router.push(`/thank-you?product=${encodeURIComponent(product.fr.name)}`);
+    } catch {
+      setStatus("idle");
+      setFormError(
+        lang === "ar"
+          ? "حدث خطأ، يرجى المحاولة مجدداً"
+          : "Une erreur est survenue, veuillez réessayer."
+      );
+    }
+  }
+
+  return (
+    <div>
+      {/* ── A. Breadcrumb ─────────────────────────────────────────────── */}
+      <div className="bg-sage border-b border-edge pt-[68px]">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-3">
+          <nav className="flex items-center gap-2 text-xs text-muted">
+            <Link href="/" className="hover:text-forest transition-colors">
+              {lang === "ar" ? "الرئيسية" : "Accueil"}
+            </Link>
+            <span className="opacity-40">/</span>
+            <Link href="/shop" className="hover:text-forest transition-colors">
+              {lang === "ar" ? "المتجر" : "Boutique"}
+            </Link>
+            <span className="opacity-40">/</span>
+            <span className="text-ink font-semibold">{product.fr.name}</span>
+          </nav>
+        </div>
+      </div>
+
+      {/* ── B. Product Hero ───────────────────────────────────────────── */}
+      <section className="bg-sage py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+
+            {/* Left: image gallery (sticky) */}
+            <div className="lg:sticky lg:top-24 lg:self-start space-y-4">
+              <div
+                className="relative aspect-square rounded-3xl overflow-hidden shadow-xl"
+                style={{ backgroundColor: product.bg }}
+              >
+                <Image
+                  src={product.images[activeImg]}
+                  alt={item.name}
+                  fill
+                  className="object-contain transition-all duration-500"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+              </div>
+              {product.images.length > 1 && (
+                <div className="flex gap-3">
+                  {product.images.map((src, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveImg(i)}
+                      aria-label={`Image ${i + 1}`}
+                      className="relative w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border-2 transition-all duration-200"
+                      style={{
+                        borderColor: activeImg === i ? product.color : "transparent",
+                        opacity: activeImg === i ? 1 : 0.45,
+                      }}
+                    >
+                      <Image src={src} alt="" fill className="object-cover" sizes="64px" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Right: product details */}
+            <div className="space-y-6">
+              {/* Certified tag */}
+              <span
+                className="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full"
+                style={{ backgroundColor: `${product.color}18`, color: product.color }}
+              >
+                {t.product.certifiedBy}
+              </span>
+
+              {/* Names */}
+              <div>
+                <h1
+                  className="font-display font-black text-ink leading-tight"
+                  style={{ fontSize: "clamp(2rem, 5vw, 3.2rem)" }}
+                >
+                  {product.fr.name}
+                </h1>
+                <p
+                  className="font-display text-2xl font-semibold text-muted mt-1"
+                  dir="rtl"
+                >
+                  {product.ar.name}
+                </p>
+              </div>
+
+              {/* Stars */}
+              <div className="flex items-center gap-1">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <StarIcon key={i} />
+                ))}
+                <span className="text-sm text-muted ml-2 font-medium">5.0</span>
+              </div>
+
+              {/* Tagline */}
+              <p className="text-forest-mid font-semibold text-sm tracking-wide uppercase">
+                {item.tagline}
+              </p>
+
+              {/* Description */}
+              <p className="text-body text-base leading-relaxed">{item.description}</p>
+
+              {/* Benefits */}
+              <ul className="space-y-3">
+                {item.benefits.map((b) => (
+                  <li key={b} className="flex items-start gap-3">
+                    <span
+                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ backgroundColor: `${product.color}18` }}
+                    >
+                      <CheckIcon color={product.color} />
+                    </span>
+                    <span className="text-body text-sm leading-snug">{b}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="border-t border-edge" />
+
+              {/* Price + quantity */}
+              <div className="flex flex-wrap items-center gap-6">
+                <div>
+                  <span className="font-black text-4xl text-ink tabular-nums">
+                    {product.price}
+                  </span>
+                  <span className="text-muted text-sm ml-2">{t.product.perUnit}</span>
+                </div>
+
+                {/* Qty selector */}
+                <div className="flex items-center gap-1 border-2 border-edge rounded-full overflow-hidden">
+                  <button
+                    onClick={() => handleQty(-1)}
+                    disabled={qty <= 1}
+                    className="w-10 h-10 flex items-center justify-center text-lg font-bold text-body hover:bg-sage transition-colors disabled:opacity-30"
+                    aria-label="Diminuer la quantité"
+                  >
+                    −
+                  </button>
+                  <span className="w-8 text-center font-bold text-ink tabular-nums">{qty}</span>
+                  <button
+                    onClick={() => handleQty(1)}
+                    disabled={qty >= 10}
+                    className="w-10 h-10 flex items-center justify-center text-lg font-bold text-body hover:bg-sage transition-colors disabled:opacity-30"
+                    aria-label="Augmenter la quantité"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              {/* Inline checkout card */}
+              <div className="bg-white rounded-3xl border border-edge overflow-hidden shadow-sm">
+                {/* Mini order summary */}
+                <div className="bg-sage border-b border-edge px-6 py-4 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div
+                      className="relative w-12 h-12 rounded-xl overflow-hidden flex-shrink-0"
+                      style={{ backgroundColor: product.bg }}
+                    >
+                      <Image
+                        src={product.image}
+                        alt={item.name}
+                        fill
+                        className="object-contain"
+                        sizes="48px"
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-bold text-ink text-sm truncate">{product.fr.name}</p>
+                      <p className="text-muted text-xs" dir="rtl">{product.ar.name}</p>
+                    </div>
+                  </div>
+                  <div className="text-right flex-shrink-0">
+                    <p className="font-black text-ink tabular-nums text-lg">{subtotal} DH</p>
+                    <p className="text-forest-mid text-xs font-semibold">{t.checkout.deliveryValue}</p>
+                  </div>
+                </div>
+
+                {/* Form */}
+                <div className="px-6 py-6">
+                  <form onSubmit={handleSubmit} noValidate className="space-y-4">
+                    <h3 className="font-display font-bold text-ink text-base">
+                      {t.checkout.formTitle}
+                    </h3>
+
+                    {/* Name */}
+                    <div>
+                      <label className="block text-xs font-bold text-body uppercase tracking-wide mb-1.5">
+                        {t.checkout.name}
+                      </label>
+                      <input
+                        type="text"
+                        value={form.name}
+                        onChange={(e) => handleField("name", e.target.value)}
+                        placeholder={t.checkout.namePlaceholder}
+                        className={`border-2 rounded-xl px-4 py-3 w-full outline-none text-ink transition-colors focus:border-forest text-sm ${
+                          errors.name ? "border-red-400" : "border-edge"
+                        }`}
+                      />
+                      {errors.name && (
+                        <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+                      )}
+                    </div>
+
+                    {/* Phone */}
+                    <div>
+                      <label className="block text-xs font-bold text-body uppercase tracking-wide mb-1.5">
+                        {t.checkout.phone}
+                      </label>
+                      <div className="relative">
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted text-sm font-medium pointer-events-none select-none">
+                          🇲🇦
+                        </span>
+                        <input
+                          type="tel"
+                          value={form.phone}
+                          onChange={(e) => handleField("phone", e.target.value)}
+                          placeholder={t.checkout.phonePlaceholder}
+                          className={`border-2 rounded-xl pl-10 pr-4 py-3 w-full outline-none text-ink transition-colors focus:border-forest text-sm ${
+                            errors.phone ? "border-red-400" : "border-edge"
+                          }`}
+                        />
+                      </div>
+                      {errors.phone && (
+                        <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+                      )}
+                    </div>
+
+                    {/* City */}
+                    <div>
+                      <label className="block text-xs font-bold text-body uppercase tracking-wide mb-1.5">
+                        {t.checkout.city}
+                      </label>
+                      <input
+                        type="text"
+                        value={form.city}
+                        onChange={(e) => handleField("city", e.target.value)}
+                        placeholder={t.checkout.cityPlaceholder}
+                        className={`border-2 rounded-xl px-4 py-3 w-full outline-none text-ink transition-colors focus:border-forest text-sm ${
+                          errors.city ? "border-red-400" : "border-edge"
+                        }`}
+                      />
+                      {errors.city && (
+                        <p className="text-red-500 text-xs mt-1">{errors.city}</p>
+                      )}
+                    </div>
+
+                    {/* Address */}
+                    <div>
+                      <label className="block text-xs font-bold text-body uppercase tracking-wide mb-1.5">
+                        {t.checkout.address}
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={form.address}
+                        onChange={(e) => handleField("address", e.target.value)}
+                        placeholder={t.checkout.addressPlaceholder}
+                        className={`border-2 rounded-xl px-4 py-3 w-full outline-none text-ink transition-colors focus:border-forest resize-none text-sm ${
+                          errors.address ? "border-red-400" : "border-edge"
+                        }`}
+                      />
+                      {errors.address && (
+                        <p className="text-red-500 text-xs mt-1">{errors.address}</p>
+                      )}
+                    </div>
+
+                    {/* API error */}
+                    {formError && (
+                      <p className="text-red-500 text-sm text-center font-medium">{formError}</p>
+                    )}
+
+                    {/* Submit */}
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      className="w-full text-white font-bold py-4 rounded-full text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all duration-200 disabled:opacity-70"
+                      style={{ backgroundColor: product.color }}
+                    >
+                      {status === "submitting" ? (
+                        <>
+                          <SpinnerIcon />
+                          {t.checkout.submitting}
+                        </>
+                      ) : (
+                        t.checkout.submit
+                      )}
+                    </button>
+
+                    {/* Trust row */}
+                    <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 pt-1">
+                      {[
+                        {
+                          icon: (
+                            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <rect x="3" y="11" width="18" height="11" rx="2" />
+                              <path d="M7 11V7a5 5 0 0110 0v4" />
+                            </svg>
+                          ),
+                          label: t.checkout.trust[0],
+                        },
+                        {
+                          icon: (
+                            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <rect x="2" y="7" width="20" height="14" rx="2" />
+                              <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+                              <path d="M12 12v4M10 14h4" />
+                            </svg>
+                          ),
+                          label: t.checkout.trust[1],
+                        },
+                        {
+                          icon: (
+                            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                              <path d="M22 4L12 14.01l-3-3" />
+                            </svg>
+                          ),
+                          label: t.checkout.trust[2],
+                        },
+                      ].map((trustItem) => (
+                        <div
+                          key={trustItem.label}
+                          className="flex items-center gap-1 text-muted text-xs"
+                        >
+                          <span className="text-forest-mid">{trustItem.icon}</span>
+                          {trustItem.label}
+                        </div>
+                      ))}
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── C. Details section ────────────────────────────────────────── */}
+      <section id="details" className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+            {/* How to use */}
+            <div>
+              <h2 className="font-display font-black text-ink text-2xl lg:text-3xl mb-8">
+                {t.product.howToUse}
+              </h2>
+              <ol className="space-y-6">
+                {steps.map((step, i) => (
+                  <li key={i} className="flex items-start gap-5">
+                    <span
+                      className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-black text-lg text-white"
+                      style={{ backgroundColor: product.color }}
+                    >
+                      {i + 1}
+                    </span>
+                    <p className="text-body leading-relaxed pt-1.5">{step}.</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            {/* Ingredients */}
+            <div>
+              <h2 className="font-display font-black text-ink text-2xl lg:text-3xl mb-8">
+                {t.product.ingredients}
+              </h2>
+              <div className="flex flex-wrap gap-3">
+                {item.ingredients.map((ing) => (
+                  <span
+                    key={ing}
+                    className="px-4 py-2 rounded-full text-sm font-semibold border-2"
+                    style={{
+                      borderColor: product.color,
+                      color: product.color,
+                      backgroundColor: `${product.color}0D`,
+                    }}
+                  >
+                    {ing}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── D. FAQ accordion ──────────────────────────────────────────── */}
+      <section className="bg-sage py-20">
+        <div className="max-w-3xl mx-auto px-5 sm:px-8">
+          <h2 className="font-display font-black text-ink text-2xl lg:text-3xl mb-10 text-center">
+            {t.product.faqTitle}
+          </h2>
+          <div className="space-y-3">
+            {item.faq.map((faqItem, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl border border-edge overflow-hidden"
+              >
+                <button
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  aria-expanded={openFaq === i}
+                >
+                  <span className="font-semibold text-ink text-sm sm:text-base">
+                    {faqItem.q}
+                  </span>
+                  <span style={{ color: product.color }}>
+                    <ChevronIcon open={openFaq === i} />
+                  </span>
+                </button>
+                <div
+                  className="overflow-hidden transition-all duration-300"
+                  style={{ maxHeight: openFaq === i ? "200px" : "0px" }}
+                >
+                  <p className="px-6 pb-5 text-body text-sm leading-relaxed">
+                    {faqItem.a}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── E. Trust bar ──────────────────────────────────────────────── */}
+      <section className="bg-forest py-10">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+            {[
+              {
+                label: lang === "ar" ? "معتمد أونسا" : "ONSSA Certifié",
+                icon: (
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+                ),
+              },
+              {
+                label: lang === "ar" ? "100% طبيعي" : "100% Naturel",
+                icon: (
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22V12" />
+                    <path d="M5 12C5 8.5 8 4 12 2c4 2 7 6.5 7 10H5z" />
+                  </svg>
+                ),
+              },
+              {
+                label: lang === "ar" ? "صنع في المغرب" : "Fabriqué au Maroc",
+                icon: (
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20" />
+                  </svg>
+                ),
+              },
+            ].map((pillar) => (
+              <div
+                key={pillar.label}
+                className="flex flex-col items-center gap-3 py-6 sm:py-0 px-6 text-center"
+              >
+                <span className="text-forest-light">{pillar.icon}</span>
+                <span className="text-white font-semibold text-sm">{pillar.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── G. Related products ───────────────────────────────────────── */}
+      <section className="bg-sage py-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <h2 className="font-display font-black text-ink text-2xl lg:text-3xl mb-10 text-center">
+            {t.product.related}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {relatedProducts.map((rel) => {
+              const relItem = lang === "ar" ? rel.ar : rel.fr;
+              return (
+                <Link
+                  key={rel.id}
+                  href={`/shop/${rel.id}`}
+                  className="group flex flex-col rounded-3xl overflow-hidden border border-edge hover:border-transparent hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white"
+                >
+                  <div
+                    className="relative h-52 w-full"
+                    style={{ backgroundColor: rel.bg }}
+                  >
+                    <Image
+                      src={rel.image}
+                      alt={relItem.name}
+                      fill
+                      className="object-contain transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <p className="font-display font-black text-ink">{rel.fr.name}</p>
+                    <p className="text-muted text-sm mt-0.5" dir="rtl">{rel.ar.name}</p>
+                    <span
+                      className="inline-block mt-3 text-xs font-bold"
+                      style={{ color: rel.color }}
+                    >
+                      {rel.price} →
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+    </div>
+  );
+}

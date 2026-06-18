@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/* ── Font variables (switch on RTL) ──────────────────── */
+:root {
+  --active-body-font:    var(--font-ibm-plex-sans);
+  --active-display-font: var(--font-ibm-plex-sans);
+}
+
+html[dir="rtl"] {
+  --active-body-font:    var(--font-ibm-plex-sans-arabic);
+  --active-display-font: var(--font-ibm-plex-sans-arabic);
+}
+
+/* ── Design tokens ───────────────────────────────────── */
+@theme {
+  --color-sage:           #E4F0E8;
+  --color-sage-dark:      #CCDFD4;
+  --color-sage-deeper:    #B8D0C2;
+  --color-forest:         #1B5430;
+  --color-forest-dark:    #103520;
+  --color-forest-mid:     #2D7848;
+  --color-forest-light:   #5A9E74;
+  --color-ink:            #0C190E;
+  --color-body:           #344A3B;
+  --color-muted:          #68806F;
+  --color-edge:           #C2D9C9;
+  --color-white:          #FFFFFF;
+}
+
+@theme inline {
+  --font-sans:    var(--active-body-font);
+  --font-display: var(--active-display-font);
+}
+
+/* ── Base ────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--color-sage);
+  color: var(--color-body);
+}
+
+/* ── Keyframes ───────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(-36px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(36px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* ── Animation utilities ─────────────────────────────── */
+.animate-fade-up    { animation: fadeUp     0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-fade-in    { animation: fadeIn     0.6s ease both; }
+.animate-slide-left { animation: slideLeft  0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-slide-right{ animation: slideRight 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-scale-in   { animation: scaleIn    0.6s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-float      { animation: floatY     4s ease-in-out infinite; }
+
+.delay-100 { animation-delay: 100ms; }
+.delay-150 { animation-delay: 150ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+
+.invisible-until-animate { opacity: 0; }
