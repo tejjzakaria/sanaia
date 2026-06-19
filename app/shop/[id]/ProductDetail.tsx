@@ -304,14 +304,26 @@ export default function ProductDetail({ product }: { product: Product }) {
                           backgroundColor: isSelected ? `${product.color}10` : "white",
                         }}
                       >
-                        {saving > 0 && (
+                        {i === 1 && saving > 0 ? (
+                          <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1">
+                            <span className="bg-ink text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">
+                              {lang === "ar" ? "الأكثر طلباً" : "Populaire"}
+                            </span>
+                            <span
+                              className="text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap"
+                              style={{ backgroundColor: product.color }}
+                            >
+                              -{saving} DH
+                            </span>
+                          </div>
+                        ) : saving > 0 ? (
                           <span
                             className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap"
                             style={{ backgroundColor: product.color }}
                           >
                             -{saving} DH
                           </span>
-                        )}
+                        ) : null}
                         <span className="font-bold text-ink text-xs">
                           {lang === "ar" ? p.labelAr : p.label}
                         </span>

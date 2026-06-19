@@ -113,7 +113,7 @@ const translations = {
       title: "Une Gamme Pour Chaque Besoin",
       description:
         "Chaque formule est soigneusement élaborée pour répondre à vos besoins spécifiques.",
-      cta: "Acheter maintenant",
+      cta: "Commander",
       items: [
         { name: "Collagène Marin", tagline: "Peau · Cheveux · Ongles · Articulations" },
         { name: "MoodCalm",        tagline: "Soutien naturel au stress & à l'humeur" },
@@ -253,7 +253,7 @@ const translations = {
       cityPlaceholder: "Casablanca",
       address: "Adresse complète",
       addressPlaceholder: "Numéro, rue, quartier...",
-      submit: "Confirmer ma commande",
+      submit: "Commander",
       submitting: "Traitement...",
       successTitle: "Commande confirmée !",
       successBody: "Notre équipe vous contactera sous 24h pour confirmer votre livraison.",
