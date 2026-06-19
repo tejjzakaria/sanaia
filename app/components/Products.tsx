@@ -88,10 +88,11 @@ export default function Products() {
                     <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                       <div className="space-y-1">
                         <StarRating rating={product.rating} />
-                        <div className="flex items-baseline gap-1">
+                        <div className="flex items-baseline gap-1.5">
                           <span className="text-[10px] text-muted font-medium">
                             {lang === "ar" ? "ابتداءً من" : "Dès"}
                           </span>
+                          <span className="text-xs text-muted line-through tabular-nums">299 DH</span>
                           <span
                             className="font-black text-base tabular-nums"
                             style={{ color: product.color }}
