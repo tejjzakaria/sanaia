@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import AnimateIn from "./AnimateIn";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -17,11 +17,34 @@ function VideoCard({ src, index }: { src: string; index: number }) {
   const [playing, setPlaying] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Load only metadata (first frame thumbnail) when card scrolls into view
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.preload = "metadata";
+          video.load();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   async function toggle() {
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {
       setLoading(true);
+      // Upgrade to full load on first tap if metadata-only so far
+      if (video.preload !== "auto") {
+        video.preload = "auto";
+        video.load();
+      }
       try {
         await video.play();
         setPlaying(true);
@@ -46,7 +69,7 @@ function VideoCard({ src, index }: { src: string; index: number }) {
           ref={videoRef}
           className="w-full h-full object-cover"
           playsInline
-          preload="auto"
+          preload="none"
           onEnded={() => { setPlaying(false); setLoading(false); }}
         >
           <source src={src} type="video/mp4" />
