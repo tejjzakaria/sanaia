@@ -202,7 +202,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                   src={product.images[activeImg]}
                   alt={item.name}
                   fill
-                  className="object-contain p-6 transition-all duration-500"
+                  className="object-cover transition-all duration-500"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
                 />
@@ -220,7 +220,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                         opacity: activeImg === i ? 1 : 0.45,
                       }}
                     >
-                      <Image src={src} alt="" fill className="object-contain p-1" sizes="64px" />
+                      <Image src={src} alt="" fill className="object-cover" sizes="64px" />
                     </button>
                   ))}
                 </div>
@@ -661,7 +661,7 @@ export default function ProductDetail({ product }: { product: Product }) {
           <h2 className="font-display font-black text-ink text-2xl lg:text-3xl mb-10 text-center">
             {t.product.related}
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6">
             {relatedProducts.map((rel) => {
               const relItem = lang === "ar" ? rel.ar : rel.fr;
               return (
@@ -675,8 +675,8 @@ export default function ProductDetail({ product }: { product: Product }) {
                       src={rel.image}
                       alt={relItem.name}
                       fill
-                      className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 640px) 50vw, 33vw"
                     />
                   </div>
                   <div className="p-5">

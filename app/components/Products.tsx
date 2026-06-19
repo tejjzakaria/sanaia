@@ -38,7 +38,8 @@ export default function Products() {
                       src={product.image}
                       alt={item.name}
                       fill
-                      className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 1024px) 50vw, 25vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
 

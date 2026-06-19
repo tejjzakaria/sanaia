@@ -52,7 +52,7 @@ export default function ShopContent() {
       {/* Product card grid */}
       <section id="products-grid" className="bg-white py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {PRODUCTS.map((product) => {
               const item = lang === "ar" ? product.ar : product.fr;
               return (
@@ -68,8 +68,8 @@ export default function ShopContent() {
                       src={product.image}
                       alt={item.name}
                       fill
-                      className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 1024px) 50vw, 25vw"
                     />
                   </div>
 
