@@ -69,27 +69,24 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-1">
             {links.map((l) => {
               const isActive = pathname === l.href;
               return (
                 <Link
                   key={l.label}
                   href={l.href}
-                  className={`relative text-sm font-medium transition-colors duration-200 group pb-0.5 ${
+                  className={`relative px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
                     darkHero
-                      ? "text-white/80 hover:text-white"
+                      ? isActive
+                        ? "text-white bg-white/15 backdrop-blur-sm"
+                        : "text-white/70 hover:text-white hover:bg-white/10"
                       : isActive
-                      ? "text-forest"
-                      : "text-body hover:text-forest"
+                      ? "text-forest bg-forest/10"
+                      : "text-body hover:text-forest hover:bg-forest/6"
                   }`}
                 >
                   {l.label}
-                  <span
-                    className={`absolute bottom-0 left-0 h-0.5 rounded-full transition-all duration-300 ${
-                      darkHero ? "bg-white" : "bg-forest"
-                    } ${isActive ? "w-full" : "w-0 group-hover:w-full"}`}
-                  />
                 </Link>
               );
             })}
