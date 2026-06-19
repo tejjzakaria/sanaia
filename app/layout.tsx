@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   title: "SANAÏA – Compléments Alimentaires 100% Naturels",
   description:
     "Découvrez nos compléments alimentaires bio, certifiés ONSSA et formulés avec les meilleurs extraits naturels pour votre santé.",
+  icons: {
+    icon: "/sanaia-images/sanaia-logo-without-bg-fav.png",
+    apple: "/sanaia-images/sanaia-logo-without-bg-fav.png",
+  },
 };
 
 export default function RootLayout({
