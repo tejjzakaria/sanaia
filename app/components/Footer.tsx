@@ -29,7 +29,7 @@ export default function Footer() {
               alt="Certifié ONSSA · ISO · GMP · SGS · FDA"
               width={480}
               height={113}
-              className="w-full max-w-[280px] h-auto opacity-50"
+              className="w-full max-w-[280px] h-auto"
             />
             <p className="text-white/20 text-xs">{t.footer.onssa}</p>
           </div>

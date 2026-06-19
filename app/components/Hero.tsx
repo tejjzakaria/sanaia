@@ -81,16 +81,7 @@ export default function Hero() {
               </Link>
             </div>
 
-            {/* Lab certifications strip */}
-            <AnimateIn animation="animate-fade-up" delay="delay-300">
-              <Image
-                src="/labs.webp"
-                alt="Certifié ONSSA · ISO · GMP · SGS · FDA"
-                width={480}
-                height={113}
-                className="w-full max-w-[260px] sm:max-w-[360px] h-auto opacity-85"
-              />
-            </AnimateIn>
+            
           </div>
 
           {/* RIGHT — Product image */}

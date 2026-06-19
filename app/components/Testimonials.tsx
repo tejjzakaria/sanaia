@@ -15,13 +15,21 @@ const DELAYS = ["delay-100", "delay-200", "delay-300", "delay-400"];
 function VideoCard({ src, index }: { src: string; index: number }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  function toggle() {
+  async function toggle() {
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {
-      video.play();
-      setPlaying(true);
+      setLoading(true);
+      try {
+        await video.play();
+        setPlaying(true);
+      } catch {
+        setPlaying(false);
+      } finally {
+        setLoading(false);
+      }
     } else {
       video.pause();
       setPlaying(false);
@@ -31,33 +39,41 @@ function VideoCard({ src, index }: { src: string; index: number }) {
   return (
     <AnimateIn animation="animate-scale-in" delay={DELAYS[index]}>
       <div
-        className="group relative rounded-3xl overflow-hidden bg-ink aspect-[9/16] shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer"
+        className="group relative rounded-3xl overflow-hidden bg-ink aspect-[9/16] shadow-xl cursor-pointer active:scale-[0.98] transition-transform duration-150"
         onClick={toggle}
       >
         <video
           ref={videoRef}
-          src={src}
           className="w-full h-full object-cover"
           playsInline
-          preload="metadata"
-          onEnded={() => setPlaying(false)}
-        />
+          preload="auto"
+          onEnded={() => { setPlaying(false); setLoading(false); }}
+        >
+          <source src={src} type="video/mp4" />
+        </video>
 
         <div
           className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
-            playing ? "opacity-0 pointer-events-none" : "opacity-100"
+            playing && !loading ? "opacity-0 pointer-events-none" : "opacity-100"
           }`}
         >
           <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent" />
 
           <button
             onClick={(e) => { e.stopPropagation(); toggle(); }}
-            className="relative z-10 w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-200"
+            className="relative z-10 w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-xl transition-transform duration-200 group-hover:scale-110"
             aria-label="Lire la vidéo"
           >
-            <svg className="w-6 h-6 text-forest translate-x-0.5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M8 5v14l11-7z" />
-            </svg>
+            {loading ? (
+              <svg className="w-6 h-6 text-forest animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <circle className="opacity-25" cx="12" cy="12" r="10" strokeWidth="4" />
+                <path className="opacity-75" d="M4 12a8 8 0 018-8" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6 text-forest translate-x-0.5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            )}
           </button>
 
           <div className="absolute bottom-0 inset-x-0 p-5">
