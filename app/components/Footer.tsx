@@ -71,6 +71,21 @@ export default function Footer() {
                 </svg>
                 <span>{t.footer.email}</span>
               </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/sanaia.ma"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 hover:text-white transition-colors duration-200"
+                >
+                  <svg className="w-4 h-4 flex-shrink-0 text-forest-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+                  </svg>
+                  <span>@sanaia.ma</span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>

@@ -41,7 +41,7 @@ export default function Navbar() {
           {[0, 1].map((half) => (
             <div key={half} className="flex items-center shrink-0" aria-hidden={half === 1 ? true : undefined}>
               {Array.from({ length: 4 }).flatMap((_, r) =>
-                ["Livraison gratuite au Maroc", "توصيل مجاني في المغرب", "Paiement à la livraison", "الدفع عند الاستلام"].map((item, i) => (
+                ["🚚 🇲🇦 Livraison gratuite au Maroc", "🚚 🇲🇦 توصيل مجاني في المغرب", "🚚 🇲🇦 Paiement à la livraison", "🚚 🇲🇦 الدفع عند الاستلام"].map((item, i) => (
                   <span key={`${r}-${i}`} className="inline-flex items-center gap-3 text-white text-xs font-semibold px-6 whitespace-nowrap">
                     {item}
                     <svg className="w-2 h-2 text-white/40 flex-shrink-0" viewBox="0 0 10 10" fill="currentColor">
