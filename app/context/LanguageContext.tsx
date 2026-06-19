@@ -58,11 +58,11 @@ const translations = {
     },
     hero: {
       tag: "+ SANAÏA NATUREL",
-      headline1: "Des Compléments",
+      headline1: "Compléments",
       headline2: "100% Naturels",
-      headline3: "Pour Votre Santé",
+      headline3: "Pour Vous",
       description:
-        "Des formules bio avancées, certifiées ONSSA et fabriquées au Maroc avec les meilleurs extraits naturels pour votre bien-être quotidien.",
+        "Certifiés ONSSA, formulés au Maroc avec les meilleurs extraits naturels pour prendre soin de vous au quotidien.",
       cta: "Découvrir nos produits",
       ctaSecondary: "En savoir plus",
       badge1: "100% Naturel",

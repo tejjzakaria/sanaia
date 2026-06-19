@@ -99,25 +99,19 @@ export default function ProductDetail({ product }: { product: Product }) {
 
   const [activeImg, setActiveImg] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [qty, setQty] = useState(1);
+  const [selectedPack, setSelectedPack] = useState(0);
   const [form, setForm] = useState({ name: "", phone: "", city: "", address: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "submitting">("idle");
 
-  // Split howToUse by periods for numbered steps
   const steps = item.howToUse
     .split(".")
     .map((s) => s.trim())
     .filter(Boolean);
 
-  const subtotal = parseInt(product.price) * qty;
-
+  const pack = product.packs[selectedPack];
   const relatedProducts = PRODUCTS.filter((p) => p.id !== product.id).slice(0, 3);
-
-  function handleQty(delta: number) {
-    setQty((prev) => Math.min(10, Math.max(1, prev + delta)));
-  }
 
   function handleField(field: string, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -147,9 +141,9 @@ export default function ProductDetail({ product }: { product: Product }) {
         body: JSON.stringify({
           product: product.fr.name,
           productAr: product.ar.name,
-          qty,
-          unitPrice: product.price,
-          total: `${subtotal} DH`,
+          pack: pack.label,
+          qty: pack.qty,
+          total: pack.price,
           name: form.name,
           phone: form.phone,
           city: form.city,
@@ -283,34 +277,47 @@ export default function ProductDetail({ product }: { product: Product }) {
 
               <div className="border-t border-edge" />
 
-              {/* Price + quantity */}
-              <div className="flex flex-wrap items-center gap-6">
-                <div>
-                  <span className="font-black text-4xl text-ink tabular-nums">
-                    {product.price}
-                  </span>
-                  <span className="text-muted text-sm ml-2">{t.product.perUnit}</span>
-                </div>
-
-                {/* Qty selector */}
-                <div className="flex items-center gap-1 border-2 border-edge rounded-full overflow-hidden">
-                  <button
-                    onClick={() => handleQty(-1)}
-                    disabled={qty <= 1}
-                    className="w-10 h-10 flex items-center justify-center text-lg font-bold text-body hover:bg-sage transition-colors disabled:opacity-30"
-                    aria-label="Diminuer la quantité"
-                  >
-                    −
-                  </button>
-                  <span className="w-8 text-center font-bold text-ink tabular-nums">{qty}</span>
-                  <button
-                    onClick={() => handleQty(1)}
-                    disabled={qty >= 10}
-                    className="w-10 h-10 flex items-center justify-center text-lg font-bold text-body hover:bg-sage transition-colors disabled:opacity-30"
-                    aria-label="Augmenter la quantité"
-                  >
-                    +
-                  </button>
+              {/* Pack selector */}
+              <div className="space-y-3">
+                <p className="text-xs font-bold text-body uppercase tracking-wide">
+                  {lang === "ar" ? "اختر الباقة" : "Choisissez votre offre"}
+                </p>
+                <div className="grid grid-cols-3 gap-2">
+                  {product.packs.map((p, i) => {
+                    const isSelected = selectedPack === i;
+                    const saving = i > 0
+                      ? product.packs[0].priceNum * p.qty - p.priceNum
+                      : 0;
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => setSelectedPack(i)}
+                        className="relative flex flex-col items-center gap-1 rounded-2xl border-2 py-3 px-2 transition-all duration-200"
+                        style={{
+                          borderColor: isSelected ? product.color : "var(--color-edge)",
+                          backgroundColor: isSelected ? `${product.color}10` : "white",
+                        }}
+                      >
+                        {saving > 0 && (
+                          <span
+                            className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap"
+                            style={{ backgroundColor: product.color }}
+                          >
+                            -{saving} DH
+                          </span>
+                        )}
+                        <span className="font-bold text-ink text-xs">
+                          {lang === "ar" ? p.labelAr : p.label}
+                        </span>
+                        <span
+                          className="font-black text-sm tabular-nums"
+                          style={{ color: product.color }}
+                        >
+                          {p.price}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -334,7 +341,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                     </div>
                   </div>
                   <div className="text-right flex-shrink-0">
-                    <p className="font-black text-ink tabular-nums text-lg">{subtotal} DH</p>
+                    <p className="font-black text-ink tabular-nums text-lg">{pack.price}</p>
                     <p className="text-forest-mid text-xs font-semibold">{t.checkout.deliveryValue}</p>
                   </div>
                 </div>
@@ -376,6 +383,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                         </span>
                         <input
                           type="tel"
+                          dir="ltr"
                           value={form.phone}
                           onChange={(e) => handleField("phone", e.target.value)}
                           placeholder={t.checkout.phonePlaceholder}
@@ -672,7 +680,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                       className="inline-block mt-3 text-xs font-bold"
                       style={{ color: rel.color }}
                     >
-                      {rel.price} →
+                      {lang === "ar" ? "ابتداءً من" : "Dès"} {rel.packs[0].price} →
                     </span>
                   </div>
                 </Link>

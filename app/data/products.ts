@@ -8,6 +8,14 @@ export interface ProductTranslation {
   faq: { q: string; a: string }[];
 }
 
+export interface ProductPack {
+  qty: number;
+  label: string;
+  labelAr: string;
+  price: string;
+  priceNum: number;
+}
+
 export interface Product {
   id: string;
   image: string;
@@ -15,6 +23,7 @@ export interface Product {
   color: string;
   bg: string;
   price: string;
+  packs: ProductPack[];
   fr: ProductTranslation;
   ar: ProductTranslation;
 }
@@ -22,18 +31,23 @@ export interface Product {
 export const PRODUCTS: Product[] = [
   {
     id: "collagene-marin",
-    image: "/sanaia-images/Frame%20A%20-%20Shot%201%20Start.png",
+    image: "/sanaia-images/IMG_9215%202.JPG.jpeg",
+    packs: [
+      { qty: 1, label: "1 Boite",   labelAr: "علبة واحدة",  price: "219 DH", priceNum: 219 },
+      { qty: 2, label: "2 Boites",  labelAr: "علبتان",       price: "349 DH", priceNum: 349 },
+      { qty: 3, label: "3 Boites",  labelAr: "3 علب",        price: "499 DH", priceNum: 499 },
+    ],
     images: [
-      "/sanaia-images/Frame%20A%20-%20Shot%201%20Start.png",
-      "/sanaia-images/Frame%20B%20-%20Shot%201%20End%20Shot%202%20Start.png",
-      "/sanaia-images/Frame%20C%20-%20Shot%202%20End%20Shot%203%20Start.png",
-      "/sanaia-images/1781292167605.png",
-      "/sanaia-images/ChatGPT%20Image%20Jun%209%2C%202026%2C%2003_32_34%20PM.png",
       "/sanaia-images/IMG_9215%202.JPG.jpeg",
+      "/sanaia-images/Frame%20C%20-%20Shot%202%20End%20Shot%203%20Start.png",
+      "/sanaia-images/Frame%20B%20-%20Shot%201%20End%20Shot%202%20Start.png",
+      "/sanaia-images/ChatGPT%20Image%20Jun%209%2C%202026%2C%2003_32_34%20PM.png",
+      "/sanaia-images/1781292167605.png",
+      "/sanaia-images/Frame%20A%20-%20Shot%201%20Start.png",
     ],
     color: "#1A7ABF",
     bg: "rgba(26,122,191,0.08)",
-    price: "149 DH",
+    price: "219 DH",
     fr: {
       name: "Collagène Marin",
       tagline: "Peau · Cheveux · Ongles · Articulations",
@@ -99,18 +113,23 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "moodcalm",
-    image: "/sanaia-images/1781017538848.jpg.jpeg",
+    image: "/sanaia-images/IMG_9217%202.JPG.jpeg",
+    packs: [
+      { qty: 1, label: "1 Boite",   labelAr: "علبة واحدة",  price: "219 DH", priceNum: 219 },
+      { qty: 2, label: "2 Boites",  labelAr: "علبتان",       price: "349 DH", priceNum: 349 },
+      { qty: 3, label: "3 Boites",  labelAr: "3 علب",        price: "499 DH", priceNum: 499 },
+    ],
     images: [
-      "/sanaia-images/1781017538848.jpg.jpeg",
-      "/sanaia-images/MoodCalm%20Frame%20B%20-%20Shot%201%20End%20Shot%202%20Start.jpg.jpeg",
+      "/sanaia-images/IMG_9217%202.JPG.jpeg",
       "/sanaia-images/MoodCalm%20Frame%20C%20-%20Shot%202%20End%20Shot%203%20Start.png",
+      "/sanaia-images/MoodCalm%20Frame%20B%20-%20Shot%201%20End%20Shot%202%20Start.jpg.jpeg",
       "/sanaia-images/mood%20calm%201.png",
       "/sanaia-images/mood%20calm%202.png",
-      "/sanaia-images/IMG_9217%202.JPG.jpeg",
+      "/sanaia-images/1781017538848.jpg.jpeg",
     ],
     color: "#7B5EA7",
     bg: "rgba(123,94,167,0.08)",
-    price: "149 DH",
+    price: "219 DH",
     fr: {
       name: "MoodCalm",
       tagline: "Soutien naturel au stress & à l'humeur",
@@ -176,15 +195,20 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "weight-boost",
-    image: "/sanaia-images/weight%20boost%201.png",
+    image: "/sanaia-images/IMG_9214%202.JPG.jpeg",
+    packs: [
+      { qty: 1, label: "1 Boite",   labelAr: "علبة واحدة",  price: "219 DH", priceNum: 219 },
+      { qty: 2, label: "2 Boites",  labelAr: "علبتان",       price: "349 DH", priceNum: 349 },
+      { qty: 3, label: "3 Boites",  labelAr: "3 علب",        price: "499 DH", priceNum: 499 },
+    ],
     images: [
+      "/sanaia-images/IMG_9214%202.JPG.jpeg",
       "/sanaia-images/weight%20boost%201.png",
       "/sanaia-images/weight%20boost%202.png",
-      "/sanaia-images/IMG_9214%202.JPG.jpeg",
     ],
     color: "#C4621C",
     bg: "rgba(196,98,28,0.08)",
-    price: "149 DH",
+    price: "219 DH",
     fr: {
       name: "Weight Boost",
       tagline: "Pour un poids corporel sain & naturel",
@@ -252,15 +276,20 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "prostate-supp",
-    image: "/sanaia-images/prostate%20supp.png",
+    image: "/sanaia-images/IMG_9216%202.JPG.jpeg",
+    packs: [
+      { qty: 1, label: "1 Boite",   labelAr: "علبة واحدة",  price: "219 DH", priceNum: 219 },
+      { qty: 2, label: "2 Boites",  labelAr: "علبتان",       price: "349 DH", priceNum: 349 },
+      { qty: 3, label: "3 Boites",  labelAr: "3 علب",        price: "499 DH", priceNum: 499 },
+    ],
     images: [
-      "/sanaia-images/prostate%20supp.png",
-      "/sanaia-images/prostate%20supp%202.png",
       "/sanaia-images/IMG_9216%202.JPG.jpeg",
+      "/sanaia-images/prostate%20supp%202.png",
+      "/sanaia-images/prostate%20supp.png",
     ],
     color: "#1A5BAF",
     bg: "rgba(26,91,175,0.08)",
-    price: "149 DH",
+    price: "219 DH",
     fr: {
       name: "Prostate Supp",
       tagline: "Santé de la prostate & confort urinaire",

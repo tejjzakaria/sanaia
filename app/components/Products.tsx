@@ -28,7 +28,10 @@ export default function Products() {
             const item = lang === "ar" ? product.ar : product.fr;
             return (
               <AnimateIn key={product.id} animation="animate-fade-up" delay={DELAYS[i]}>
-                <div className="group bg-white border border-sage-dark hover:border-transparent rounded-3xl overflow-hidden hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
+                <Link
+                  href={`/shop/${product.id}`}
+                  className="group bg-white border border-sage-dark hover:border-transparent rounded-3xl overflow-hidden hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
+                >
                   {/* Image */}
                   <div className="relative h-72 overflow-hidden bg-white">
                     <Image
@@ -46,15 +49,14 @@ export default function Products() {
                       <p className="font-arabic text-muted text-sm font-medium mt-0.5">{product.ar.name}</p>
                     </div>
                     <p className="text-muted text-sm leading-snug flex-1">{item.tagline}</p>
-                    <Link
-                      href="/shop"
-                      className="mt-3 block text-center py-3 rounded-full text-sm font-bold text-white transition-all duration-200 hover:opacity-90 hover:shadow-md"
+                    <span
+                      className="mt-3 block text-center py-3 rounded-full text-sm font-bold text-white transition-all duration-200 group-hover:opacity-90 group-hover:shadow-md"
                       style={{ backgroundColor: product.color }}
                     >
                       {t.products.cta}
-                    </Link>
+                    </span>
                   </div>
-                </div>
+                </Link>
               </AnimateIn>
             );
           })}

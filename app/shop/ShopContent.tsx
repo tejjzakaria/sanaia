@@ -29,16 +29,17 @@ export default function ShopContent() {
               <a
                 key={p.id}
                 href={`#${p.id}`}
-                className="text-xs font-semibold px-5 py-2 rounded-full border-2 transition-all duration-200 hover:text-white hover:border-transparent"
-                style={{
-                  borderColor: p.color,
-                  color: p.color,
-                }}
+                className="text-xs font-semibold px-5 py-2 rounded-full border-2 transition-all duration-200"
+                style={{ borderColor: p.color, color: p.color, backgroundColor: "transparent" }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = p.color;
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.backgroundColor = p.color;
+                  el.style.color = "white";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "transparent";
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.backgroundColor = "transparent";
+                  el.style.color = p.color;
                 }}
               >
                 {p.fr.name}
@@ -91,12 +92,17 @@ export default function ShopContent() {
 
                     {/* Price badge + arrow */}
                     <div className="flex items-center justify-between pt-2 border-t border-edge mt-auto">
-                      <span
-                        className="font-black text-xl tabular-nums"
-                        style={{ color: product.color }}
-                      >
-                        {product.price}
-                      </span>
+                      <div className="flex flex-col leading-tight">
+                        <span className="text-muted text-[10px] font-semibold uppercase tracking-wide">
+                          {lang === "ar" ? "ابتداءً من" : "Dès"}
+                        </span>
+                        <span
+                          className="font-black text-xl tabular-nums"
+                          style={{ color: product.color }}
+                        >
+                          {product.packs[0].price}
+                        </span>
+                      </div>
                       <span
                         className="w-8 h-8 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-1"
                         style={{ backgroundColor: `${product.color}18`, color: product.color }}
