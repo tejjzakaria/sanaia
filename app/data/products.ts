@@ -49,7 +49,7 @@ export const PRODUCTS: Product[] = [
     color: "#1A7ABF",
     bg: "rgba(26,122,191,0.08)",
     price: "219 DH",
-    rating: 4.7,
+    rating: 4.9,
     fr: {
       name: "Collagène Marin",
       tagline: "Peau · Cheveux · Ongles · Articulations",
