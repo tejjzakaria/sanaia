@@ -77,20 +77,24 @@ export default function Navbar() {
           {/* Right: lang + CTA */}
           <div className="flex items-center gap-3">
             {/* Language switcher */}
-            <div className="flex items-center p-0.5 bg-sage-dark rounded-full border border-edge">
-              {(["fr", "ar"] as const).map((l) => (
-                <button
-                  key={l}
-                  onClick={() => setLang(l)}
-                  className={`px-3.5 py-1 rounded-full text-xs font-bold transition-all duration-200 ${
-                    lang === l
-                      ? "bg-forest text-white shadow-sm"
-                      : "text-muted hover:text-body"
-                  }`}
-                >
-                  {l === "fr" ? "FR" : "ع"}
-                </button>
-              ))}
+            <div className="flex items-center rounded-full overflow-hidden shadow-md ring-1 ring-black/15">
+              <button
+                onClick={() => setLang("fr")}
+                className={`flex items-center gap-1.5 px-4 py-1.5 text-xs text-white transition-all duration-300 ${lang === "fr" ? "font-black" : "font-light"}`}
+                style={{ background: "linear-gradient(160deg,#2D7848 0%,#1B5430 55%,#103520 100%)" }}
+              >
+                <span className={`w-1 h-1 rounded-full bg-white transition-all duration-300 ${lang === "fr" ? "opacity-100 scale-100" : "opacity-0 scale-0"}`} />
+                FR
+              </button>
+              <div className="w-px self-stretch bg-white/20" />
+              <button
+                onClick={() => setLang("ar")}
+                className={`flex items-center gap-1.5 px-4 py-1.5 text-xs text-white transition-all duration-300 ${lang === "ar" ? "font-black" : "font-light"}`}
+                style={{ background: "linear-gradient(160deg,#2a2a2a 0%,#0C190E 55%,#000 100%)" }}
+              >
+                ع
+                <span className={`w-1 h-1 rounded-full bg-white transition-all duration-300 ${lang === "ar" ? "opacity-100 scale-100" : "opacity-0 scale-0"}`} />
+              </button>
             </div>
 
             {/* Hamburger */}
