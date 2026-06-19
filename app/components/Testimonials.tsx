@@ -7,7 +7,7 @@ const VIDEOS = [
   "https://sanaia.s3.us-east-1.amazonaws.com/IMG_0928.mp4",
   "https://sanaia.s3.us-east-1.amazonaws.com/IMG_4213.mp4",
   "https://sanaia.s3.us-east-1.amazonaws.com/IMG_4214.mp4",
-  "https://sanaia.s3.us-east-1.amazonaws.com/IMG_6802.MP4",
+  "https://sanaia.s3.us-east-1.amazonaws.com/IMG_6802.mp4",
 ];
 
 const DELAYS = ["delay-100", "delay-200", "delay-300", "delay-400"];

@@ -2,12 +2,17 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLanguage } from "../context/LanguageContext";
 
 export default function Navbar() {
   const { lang, setLang, t } = useLanguage();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Pages whose first section has a dark background — navbar text flips white when unscrolled
+  const darkHero = !scrolled && pathname === "/about";
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
@@ -44,15 +49,29 @@ export default function Navbar() {
 
           {/* Desktop links */}
           <div className="hidden lg:flex items-center gap-8">
-            {links.map((l) => (
-              <Link
-                key={l.label}
-                href={l.href}
-                className="text-sm font-medium text-body hover:text-forest transition-colors duration-200"
-              >
-                {l.label}
-              </Link>
-            ))}
+            {links.map((l) => {
+              const isActive = pathname === l.href;
+              return (
+                <Link
+                  key={l.label}
+                  href={l.href}
+                  className={`relative text-sm font-medium transition-colors duration-200 group pb-0.5 ${
+                    darkHero
+                      ? "text-white/80 hover:text-white"
+                      : isActive
+                      ? "text-forest"
+                      : "text-body hover:text-forest"
+                  }`}
+                >
+                  {l.label}
+                  <span
+                    className={`absolute bottom-0 left-0 h-0.5 rounded-full transition-all duration-300 ${
+                      darkHero ? "bg-white" : "bg-forest"
+                    } ${isActive ? "w-full" : "w-0 group-hover:w-full"}`}
+                  />
+                </Link>
+              );
+            })}
           </div>
 
           {/* Right: lang + CTA */}
@@ -76,7 +95,7 @@ export default function Navbar() {
 
             {/* Hamburger */}
             <button
-              className="lg:hidden p-1.5 text-ink"
+              className={`lg:hidden p-1.5 transition-colors ${darkHero ? "text-white" : "text-ink"}`}
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Menu"
             >
@@ -94,16 +113,26 @@ export default function Navbar() {
         {/* Mobile menu */}
         <div className={`lg:hidden overflow-hidden transition-all duration-300 ${menuOpen ? "max-h-72 opacity-100" : "max-h-0 opacity-0"}`}>
           <div className="bg-white rounded-2xl mb-4 p-4 space-y-1 shadow-xl border border-edge">
-            {links.map((l) => (
-              <Link
-                key={l.label}
-                href={l.href}
-                className="block px-3 py-2.5 text-sm font-medium text-body hover:text-forest hover:bg-sage rounded-xl transition-colors"
-                onClick={() => setMenuOpen(false)}
-              >
-                {l.label}
-              </Link>
-            ))}
+            {links.map((l) => {
+              const isActive = pathname === l.href;
+              return (
+                <Link
+                  key={l.label}
+                  href={l.href}
+                  className={`flex items-center gap-2 px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-200 ${
+                    isActive
+                      ? "text-forest bg-sage font-semibold"
+                      : "text-body hover:text-forest hover:bg-sage"
+                  }`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {isActive && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-forest flex-shrink-0" />
+                  )}
+                  {l.label}
+                </Link>
+              );
+            })}
             <div className="pt-2">
               <Link
                 href="#produits"
