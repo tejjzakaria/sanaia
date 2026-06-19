@@ -22,12 +22,14 @@ export interface Product {
 export const PRODUCTS: Product[] = [
   {
     id: "collagene-marin",
-    image: "/sanaia-images/collagen%20marine-01.jpg.jpeg",
+    image: "/sanaia-images/Frame%20A%20-%20Shot%201%20Start.png",
     images: [
-      "/sanaia-images/collagen%20marine-01.jpg.jpeg",
       "/sanaia-images/Frame%20A%20-%20Shot%201%20Start.png",
       "/sanaia-images/Frame%20B%20-%20Shot%201%20End%20Shot%202%20Start.png",
       "/sanaia-images/Frame%20C%20-%20Shot%202%20End%20Shot%203%20Start.png",
+      "/sanaia-images/1781292167605.png",
+      "/sanaia-images/ChatGPT%20Image%20Jun%209%2C%202026%2C%2003_32_34%20PM.png",
+      "/sanaia-images/IMG_9215%202.JPG.jpeg",
     ],
     color: "#1A7ABF",
     bg: "rgba(26,122,191,0.08)",
@@ -97,11 +99,14 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "moodcalm",
-    image: "/sanaia-images/MoodCalm.jpg.jpeg",
+    image: "/sanaia-images/1781017538848.jpg.jpeg",
     images: [
-      "/sanaia-images/MoodCalm.jpg.jpeg",
+      "/sanaia-images/1781017538848.jpg.jpeg",
       "/sanaia-images/MoodCalm%20Frame%20B%20-%20Shot%201%20End%20Shot%202%20Start.jpg.jpeg",
       "/sanaia-images/MoodCalm%20Frame%20C%20-%20Shot%202%20End%20Shot%203%20Start.png",
+      "/sanaia-images/mood%20calm%201.png",
+      "/sanaia-images/mood%20calm%202.png",
+      "/sanaia-images/IMG_9217%202.JPG.jpeg",
     ],
     color: "#7B5EA7",
     bg: "rgba(123,94,167,0.08)",
@@ -171,9 +176,10 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "weight-boost",
-    image: "/sanaia-images/Weight%20Boost-01.jpg.jpeg",
+    image: "/sanaia-images/weight%20boost%201.png",
     images: [
-      "/sanaia-images/Weight%20Boost-01.jpg.jpeg",
+      "/sanaia-images/weight%20boost%201.png",
+      "/sanaia-images/weight%20boost%202.png",
       "/sanaia-images/IMG_9214%202.JPG.jpeg",
     ],
     color: "#C4621C",
@@ -246,11 +252,11 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "prostate-supp",
-    image: "/sanaia-images/PROSTATE-01.jpg.jpeg",
+    image: "/sanaia-images/prostate%20supp.png",
     images: [
-      "/sanaia-images/PROSTATE-01.jpg.jpeg",
+      "/sanaia-images/prostate%20supp.png",
+      "/sanaia-images/prostate%20supp%202.png",
       "/sanaia-images/IMG_9216%202.JPG.jpeg",
-      "/sanaia-images/IMG_9217%202.JPG.jpeg",
     ],
     color: "#1A5BAF",
     bg: "rgba(26,91,175,0.08)",

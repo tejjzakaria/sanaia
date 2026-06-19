@@ -37,7 +37,7 @@ export default function Footer() {
                 <li key={p.id}>
                   <Link href="/shop" className="group block text-white/40 hover:text-white transition-colors duration-200">
                     <span className="text-sm block">{p.fr.name}</span>
-                    <span className="text-xs block mt-0.5 opacity-60" dir="rtl">{p.ar.name}</span>
+                    <span className="font-arabic text-xs block mt-0.5 opacity-60">{p.ar.name}</span>
                   </Link>
                 </li>
               ))}

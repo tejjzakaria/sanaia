@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import AnimateIn from "./AnimateIn";
 import { useLanguage } from "../context/LanguageContext";
 
 export default function Hero() {
@@ -79,6 +80,17 @@ export default function Hero() {
                 {t.hero.ctaSecondary}
               </Link>
             </div>
+
+            {/* Lab certifications strip */}
+            <AnimateIn animation="animate-fade-up" delay="delay-300">
+              <Image
+                src="/labs.webp"
+                alt="Certifié ONSSA · ISO · GMP · SGS · FDA"
+                width={480}
+                height={113}
+                className="w-full max-w-[360px] h-auto opacity-85"
+              />
+            </AnimateIn>
           </div>
 
           {/* RIGHT — Product image */}

@@ -32,6 +32,11 @@ html[dir="rtl"] {
   --font-display: var(--active-display-font);
 }
 
+/* ── Arabic font utility (always use Arabic font for Arabic text) ── */
+.font-arabic {
+  font-family: var(--font-ibm-plex-sans-arabic), sans-serif;
+}
+
 /* ── Base ────────────────────────────────────────────── */
 html { scroll-behavior: smooth; }
 

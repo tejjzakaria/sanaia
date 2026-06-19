@@ -277,8 +277,17 @@ export default function AboutContent() {
               {t.about.certBody}
             </p>
 
-            <div className="bg-white border border-edge rounded-3xl p-8 max-w-2xl mx-auto">
+            <div className="bg-white border border-edge rounded-3xl p-8 max-w-2xl mx-auto space-y-6">
               <p className="text-body text-base leading-relaxed">{t.about.certText}</p>
+              <div className="border-t border-edge pt-6 flex justify-center">
+                <Image
+                  src="/labs.webp"
+                  alt="Certifié ONSSA · ISO · GMP · SGS · FDA"
+                  width={480}
+                  height={113}
+                  className="w-full max-w-[420px] h-auto"
+                />
+              </div>
             </div>
           </AnimateIn>
         </div>

@@ -35,7 +35,7 @@ export default function Products() {
                       src={product.image}
                       alt={item.name}
                       fill
-                      className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
 
@@ -43,7 +43,7 @@ export default function Products() {
                   <div className="p-6 flex flex-col gap-2 flex-1">
                     <div>
                       <h3 className="font-display text-xl font-bold text-ink leading-tight">{product.fr.name}</h3>
-                      <p className="text-muted text-sm font-medium mt-0.5" dir="rtl">{product.ar.name}</p>
+                      <p className="font-arabic text-muted text-sm font-medium mt-0.5">{product.ar.name}</p>
                     </div>
                     <p className="text-muted text-sm leading-snug flex-1">{item.tagline}</p>
                     <Link

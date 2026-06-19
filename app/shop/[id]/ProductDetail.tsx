@@ -197,15 +197,12 @@ export default function ProductDetail({ product }: { product: Product }) {
 
             {/* Left: image gallery (sticky) */}
             <div className="lg:sticky lg:top-24 lg:self-start space-y-4">
-              <div
-                className="relative aspect-square rounded-3xl overflow-hidden shadow-xl"
-                style={{ backgroundColor: product.bg }}
-              >
+              <div className="relative aspect-square rounded-3xl overflow-hidden shadow-xl bg-white">
                 <Image
                   src={product.images[activeImg]}
                   alt={item.name}
                   fill
-                  className="object-contain transition-all duration-500"
+                  className="object-cover transition-all duration-500"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
                 />
@@ -217,7 +214,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                       key={i}
                       onClick={() => setActiveImg(i)}
                       aria-label={`Image ${i + 1}`}
-                      className="relative w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border-2 transition-all duration-200"
+                      className="relative w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border-2 transition-all duration-200 bg-white"
                       style={{
                         borderColor: activeImg === i ? product.color : "transparent",
                         opacity: activeImg === i ? 1 : 0.45,
@@ -248,10 +245,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                 >
                   {product.fr.name}
                 </h1>
-                <p
-                  className="font-display text-2xl font-semibold text-muted mt-1"
-                  dir="rtl"
-                >
+                <p className="font-arabic text-2xl font-semibold text-muted mt-1">
                   {product.ar.name}
                 </p>
               </div>
@@ -325,21 +319,18 @@ export default function ProductDetail({ product }: { product: Product }) {
                 {/* Mini order summary */}
                 <div className="bg-sage border-b border-edge px-6 py-4 flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div
-                      className="relative w-12 h-12 rounded-xl overflow-hidden flex-shrink-0"
-                      style={{ backgroundColor: product.bg }}
-                    >
+                    <div className="relative w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 bg-white">
                       <Image
                         src={product.image}
                         alt={item.name}
                         fill
-                        className="object-contain"
+                        className="object-cover"
                         sizes="48px"
                       />
                     </div>
                     <div className="min-w-0">
                       <p className="font-bold text-ink text-sm truncate">{product.fr.name}</p>
-                      <p className="text-muted text-xs" dir="rtl">{product.ar.name}</p>
+                      <p className="font-arabic text-muted text-xs">{product.ar.name}</p>
                     </div>
                   </div>
                   <div className="text-right flex-shrink-0">
@@ -499,6 +490,17 @@ export default function ProductDetail({ product }: { product: Product }) {
                         </div>
                       ))}
                     </div>
+
+                    {/* Lab certifications */}
+                    <div className="border-t border-edge pt-4 flex justify-center">
+                      <Image
+                        src="/labs.webp"
+                        alt="Certifié ONSSA · ISO · GMP · SGS · FDA"
+                        width={360}
+                        height={85}
+                        className="w-full max-w-[280px] h-auto opacity-80"
+                      />
+                    </div>
                   </form>
                 </div>
               </div>
@@ -654,21 +656,18 @@ export default function ProductDetail({ product }: { product: Product }) {
                   href={`/shop/${rel.id}`}
                   className="group flex flex-col rounded-3xl overflow-hidden border border-edge hover:border-transparent hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white"
                 >
-                  <div
-                    className="relative h-52 w-full"
-                    style={{ backgroundColor: rel.bg }}
-                  >
+                  <div className="relative h-52 w-full bg-white">
                     <Image
                       src={rel.image}
                       alt={relItem.name}
                       fill
-                      className="object-contain transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
                   <div className="p-5">
                     <p className="font-display font-black text-ink">{rel.fr.name}</p>
-                    <p className="text-muted text-sm mt-0.5" dir="rtl">{rel.ar.name}</p>
+                    <p className="font-arabic text-muted text-sm mt-0.5">{rel.ar.name}</p>
                     <span
                       className="inline-block mt-3 text-xs font-bold"
                       style={{ color: rel.color }}

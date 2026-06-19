@@ -62,15 +62,12 @@ export default function ShopContent() {
                   className="group flex flex-col rounded-3xl overflow-hidden border border-edge hover:border-transparent hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white"
                 >
                   {/* Image area */}
-                  <div
-                    className="relative h-72 w-full overflow-hidden"
-                    style={{ backgroundColor: product.bg }}
-                  >
+                  <div className="relative h-72 w-full overflow-hidden bg-white">
                     <Image
                       src={product.image}
                       alt={item.name}
                       fill
-                      className="object-contain transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
                   </div>
@@ -82,10 +79,7 @@ export default function ShopContent() {
                       <h2 className="font-display font-black text-ink text-lg leading-tight">
                         {product.fr.name}
                       </h2>
-                      <p
-                        className="text-muted text-sm font-semibold mt-0.5"
-                        dir="rtl"
-                      >
+                      <p className="font-arabic text-muted text-sm font-semibold mt-0.5">
                         {product.ar.name}
                       </p>
                     </div>
@@ -129,10 +123,14 @@ export default function ShopContent() {
       </section>
 
       {/* Certification bar */}
-      <div className="bg-forest py-6">
-        <p className="text-center text-forest-light text-xs font-semibold tracking-widest uppercase">
-          {t.shop.onssa}
-        </p>
+      <div className="bg-white border-t border-edge py-8 flex justify-center">
+        <Image
+          src="/labs.webp"
+          alt="Certifié ONSSA · ISO · GMP · SGS · FDA"
+          width={480}
+          height={113}
+          className="w-full max-w-[420px] h-auto"
+        />
       </div>
     </>
   );
