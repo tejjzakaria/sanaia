@@ -197,12 +197,12 @@ export default function ProductDetail({ product }: { product: Product }) {
 
             {/* Left: image gallery (sticky) */}
             <div className="lg:sticky lg:top-24 lg:self-start space-y-4">
-              <div className="relative aspect-[4/3] sm:aspect-square rounded-3xl overflow-hidden shadow-xl bg-white">
+              <div className="relative aspect-square rounded-3xl overflow-hidden shadow-xl bg-white">
                 <Image
                   src={product.images[activeImg]}
                   alt={item.name}
                   fill
-                  className="object-cover transition-all duration-500"
+                  className="object-contain p-6 transition-all duration-500"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
                 />
@@ -220,7 +220,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                         opacity: activeImg === i ? 1 : 0.45,
                       }}
                     >
-                      <Image src={src} alt="" fill className="object-cover" sizes="64px" />
+                      <Image src={src} alt="" fill className="object-contain p-1" sizes="64px" />
                     </button>
                   ))}
                 </div>
@@ -670,12 +670,12 @@ export default function ProductDetail({ product }: { product: Product }) {
                   href={`/shop/${rel.id}`}
                   className="group flex flex-col rounded-3xl overflow-hidden border border-edge hover:border-transparent hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white"
                 >
-                  <div className="relative h-40 sm:h-52 w-full bg-white">
+                  <div className="relative aspect-square w-full bg-white">
                     <Image
                       src={rel.image}
                       alt={relItem.name}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>

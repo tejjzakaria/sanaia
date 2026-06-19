@@ -33,12 +33,12 @@ export default function Products() {
                   className="group bg-white border border-sage-dark hover:border-transparent rounded-3xl overflow-hidden hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
                 >
                   {/* Image */}
-                  <div className="relative h-52 sm:h-64 lg:h-72 overflow-hidden bg-white">
+                  <div className="relative aspect-square overflow-hidden bg-white">
                     <Image
                       src={product.image}
                       alt={item.name}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
 

@@ -63,12 +63,12 @@ export default function ShopContent() {
                   className="group flex flex-col rounded-3xl overflow-hidden border border-edge hover:border-transparent hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white"
                 >
                   {/* Image area */}
-                  <div className="relative h-52 sm:h-64 lg:h-72 w-full overflow-hidden bg-white">
+                  <div className="relative aspect-square w-full overflow-hidden bg-white">
                     <Image
                       src={product.image}
                       alt={item.name}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
                   </div>
