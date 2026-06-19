@@ -75,15 +75,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-white/20 text-xs">
+        <div className="pt-8 text-center text-white/20 text-xs">
           <span>{t.footer.copyright}</span>
-          <div className="flex gap-5">
-            {[t.footer.legal, t.footer.cgv, t.footer.privacy].map((label) => (
-              <Link key={label} href="#" className="hover:text-white/50 transition-colors duration-200">
-                {label}
-              </Link>
-            ))}
-          </div>
         </div>
       </div>
     </footer>
