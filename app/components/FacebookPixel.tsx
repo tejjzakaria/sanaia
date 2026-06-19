@@ -4,8 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { FB_PIXEL_ID, FB } from "../lib/pixel";
 
-const PLACEHOLDER = "PASTE_YOUR_PIXEL_ID_HERE";
-const enabled = !!FB_PIXEL_ID && FB_PIXEL_ID !== PLACEHOLDER;
+const enabled = !!FB_PIXEL_ID;
 
 export default function FacebookPixel() {
   const pathname = usePathname();
