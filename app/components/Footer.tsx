@@ -9,8 +9,8 @@ export default function Footer() {
 
   return (
     <footer id="contact" className="bg-ink text-white">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 pt-20 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-14 border-b border-white/8">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 pt-12 lg:pt-20 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 pb-10 border-b border-white/8">
           {/* Brand */}
           <div className="md:col-span-5 space-y-5">
             <div className="flex items-center gap-3">

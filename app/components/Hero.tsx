@@ -42,15 +42,15 @@ export default function Hero() {
             {/* Headline */}
             <div className="space-y-1">
               <h1 className={`font-display font-black text-ink leading-[0.95] tracking-tight ${lang !== "ar" ? "uppercase" : ""}`}
-                style={{ fontSize: "clamp(2.8rem, 6vw, 5.5rem)" }}>
+                style={{ fontSize: "clamp(2.2rem, 6vw, 5.5rem)" }}>
                 {t.hero.headline1}
               </h1>
               <h1 className={`font-display font-black text-forest leading-[0.95] tracking-tight ${lang !== "ar" ? "uppercase" : ""}`}
-                style={{ fontSize: "clamp(2.8rem, 6vw, 5.5rem)" }}>
+                style={{ fontSize: "clamp(2.2rem, 6vw, 5.5rem)" }}>
                 {t.hero.headline2}
               </h1>
               <h1 className={`font-display font-black text-ink leading-[0.95] tracking-tight ${lang !== "ar" ? "uppercase" : ""}`}
-                style={{ fontSize: "clamp(2.8rem, 6vw, 5.5rem)" }}>
+                style={{ fontSize: "clamp(2.2rem, 6vw, 5.5rem)" }}>
                 {t.hero.headline3}
               </h1>
             </div>
@@ -88,14 +88,14 @@ export default function Hero() {
                 alt="Certifié ONSSA · ISO · GMP · SGS · FDA"
                 width={480}
                 height={113}
-                className="w-full max-w-[360px] h-auto opacity-85"
+                className="w-full max-w-[260px] sm:max-w-[360px] h-auto opacity-85"
               />
             </AnimateIn>
           </div>
 
           {/* RIGHT — Product image */}
           <div className="relative flex justify-center lg:justify-end z-10">
-            <div className="relative w-full max-w-[460px] lg:max-w-[520px]">
+            <div className="relative w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[520px]">
 
               {/* Bio/offer badge */}
               <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20 bg-white border-2 border-forest/20 text-forest font-bold text-sm px-5 py-2 rounded-full shadow-md">
@@ -118,7 +118,7 @@ export default function Hero() {
               {floatingBadges.map((badge) => (
                 <div
                   key={badge.text}
-                  className="absolute z-20 flex items-center gap-2 bg-forest text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-lg whitespace-nowrap"
+                  className="absolute z-20 hidden sm:flex items-center gap-2 bg-forest text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-lg whitespace-nowrap"
                   style={{
                     top: badge.top,
                     bottom: badge.bottom,
@@ -147,11 +147,11 @@ export default function Hero() {
               { value: t.hero.stat2Value, label: t.hero.stat2Label },
               { value: t.hero.stat3Value, label: t.hero.stat3Label },
             ].map((stat) => (
-              <div key={stat.label} className="flex-1 py-7 text-center">
-                <p className="font-black text-3xl lg:text-4xl text-forest leading-none tabular-nums">
+              <div key={stat.label} className="flex-1 py-4 lg:py-7 text-center">
+                <p className="font-black text-2xl lg:text-4xl text-forest leading-none tabular-nums">
                   {stat.value}
                 </p>
-                <p className="text-body text-xs mt-2 font-semibold uppercase tracking-[0.12em]">
+                <p className="text-body text-[10px] lg:text-xs mt-1.5 font-semibold uppercase tracking-[0.1em]">
                   {stat.label}
                 </p>
               </div>

@@ -185,13 +185,13 @@ export default function ProductDetail({ product }: { product: Product }) {
       </div>
 
       {/* ── B. Product Hero ───────────────────────────────────────────── */}
-      <section className="bg-sage py-16 lg:py-24">
+      <section className="bg-sage py-8 lg:py-24">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-start">
 
             {/* Left: image gallery (sticky) */}
             <div className="lg:sticky lg:top-24 lg:self-start space-y-4">
-              <div className="relative aspect-square rounded-3xl overflow-hidden shadow-xl bg-white">
+              <div className="relative aspect-[4/3] sm:aspect-square rounded-3xl overflow-hidden shadow-xl bg-white">
                 <Image
                   src={product.images[activeImg]}
                   alt={item.name}
@@ -202,7 +202,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                 />
               </div>
               {product.images.length > 1 && (
-                <div className="flex gap-3">
+                <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide">
                   {product.images.map((src, i) => (
                     <button
                       key={i}
@@ -235,7 +235,7 @@ export default function ProductDetail({ product }: { product: Product }) {
               <div>
                 <h1
                   className="font-display font-black text-ink leading-tight"
-                  style={{ fontSize: "clamp(2rem, 5vw, 3.2rem)" }}
+                  style={{ fontSize: "clamp(1.6rem, 5vw, 3.2rem)" }}
                 >
                   {product.fr.name}
                 </h1>
@@ -664,7 +664,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                   href={`/shop/${rel.id}`}
                   className="group flex flex-col rounded-3xl overflow-hidden border border-edge hover:border-transparent hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white"
                 >
-                  <div className="relative h-52 w-full bg-white">
+                  <div className="relative h-40 sm:h-52 w-full bg-white">
                     <Image
                       src={rel.image}
                       alt={relItem.name}

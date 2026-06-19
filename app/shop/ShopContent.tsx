@@ -17,7 +17,7 @@ export default function ShopContent() {
           </p>
           <h1
             className="font-display font-black text-ink leading-tight"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+            style={{ fontSize: "clamp(1.9rem, 6vw, 5rem)" }}
           >
             {t.shop.heading}
           </h1>
@@ -63,7 +63,7 @@ export default function ShopContent() {
                   className="group flex flex-col rounded-3xl overflow-hidden border border-edge hover:border-transparent hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white"
                 >
                   {/* Image area */}
-                  <div className="relative h-72 w-full overflow-hidden bg-white">
+                  <div className="relative h-52 sm:h-64 lg:h-72 w-full overflow-hidden bg-white">
                     <Image
                       src={product.image}
                       alt={item.name}

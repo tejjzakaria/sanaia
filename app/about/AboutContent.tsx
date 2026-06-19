@@ -59,13 +59,13 @@ export default function AboutContent() {
             <div className="space-y-1">
               <h1
                 className="font-display font-black text-white leading-[0.92] tracking-tight"
-                style={{ fontSize: "clamp(3rem, 7vw, 6.5rem)" }}
+                style={{ fontSize: "clamp(2.2rem, 7vw, 6.5rem)" }}
               >
                 {t.about.heroLine1}
               </h1>
               <h1
                 className="font-display font-black text-forest-light leading-[0.92] tracking-tight"
-                style={{ fontSize: "clamp(3rem, 7vw, 6.5rem)" }}
+                style={{ fontSize: "clamp(2.2rem, 7vw, 6.5rem)" }}
               >
                 {t.about.heroLine2}
               </h1>
@@ -98,9 +98,9 @@ export default function AboutContent() {
       </section>
 
       {/* ── Mission ───────────────────────────────────────── */}
-      <section className="bg-sage py-24 lg:py-32">
+      <section className="bg-sage py-14 lg:py-32">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Image */}
             <AnimateIn animation="animate-slide-left">
               <div className="relative">
@@ -159,7 +159,7 @@ export default function AboutContent() {
                 animation="animate-scale-in"
                 delay={`delay-${(i + 1) * 150}` as "delay-150" | "delay-300" | "delay-400"}
               >
-                <div className="group relative bg-sage border border-edge hover:border-forest/20 hover:shadow-lg rounded-3xl p-8 transition-all duration-300 overflow-hidden h-full">
+                <div className="group relative bg-sage border border-edge hover:border-forest/20 hover:shadow-lg rounded-3xl p-5 lg:p-8 transition-all duration-300 overflow-hidden h-full">
                   {/* Large background number */}
                   <span className="absolute top-4 right-6 font-display text-7xl font-black text-forest/4 select-none leading-none" aria-hidden>
                     {String(i + 1).padStart(2, "0")}
@@ -178,9 +178,9 @@ export default function AboutContent() {
       </section>
 
       {/* ── Manufacturing ─────────────────────────────────── */}
-      <section className="bg-forest py-24 lg:py-32 overflow-hidden">
+      <section className="bg-forest py-14 lg:py-32 overflow-hidden">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Text */}
             <AnimateIn animation="animate-slide-left" className="space-y-6">
               <p className="text-forest-light text-xs font-bold tracking-widest uppercase">
@@ -244,7 +244,7 @@ export default function AboutContent() {
       </section>
 
       {/* ── Certification ─────────────────────────────────── */}
-      <section className="bg-sage py-24 lg:py-32">
+      <section className="bg-sage py-14 lg:py-32">
         <div className="max-w-4xl mx-auto px-5 sm:px-8 text-center">
           <AnimateIn animation="animate-fade-up" className="space-y-8">
             <p className="text-forest-mid text-xs font-bold tracking-widest uppercase">
