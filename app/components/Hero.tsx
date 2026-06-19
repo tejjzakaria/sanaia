@@ -81,7 +81,52 @@ export default function Hero() {
               </Link>
             </div>
 
-            
+            {/* Stats */}
+            <div className="flex gap-3 pt-1">
+              {[
+                {
+                  value: t.hero.stat1Value,
+                  label: t.hero.stat1Label,
+                  icon: (
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                  ),
+                },
+                {
+                  value: t.hero.stat2Value,
+                  label: t.hero.stat2Label,
+                  icon: (
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M11 20A7 7 0 014 13c0-2.5 2-6.1 7-10 5 3.9 7 7.5 7 10a7 7 0 01-7 7z"/>
+                      <path d="M11 20V9"/>
+                    </svg>
+                  ),
+                },
+                {
+                  value: t.hero.stat3Value,
+                  label: t.hero.stat3Label,
+                  icon: (
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                      <polyline points="9 12 11 14 15 10"/>
+                    </svg>
+                  ),
+                },
+              ].map((stat, i) => (
+                <div
+                  key={i}
+                  className="flex-1 bg-white/60 backdrop-blur-sm border border-white/80 rounded-2xl p-3 shadow-sm"
+                >
+                  <div className="w-6 h-6 rounded-full bg-forest/10 flex items-center justify-center text-forest mb-2">
+                    {stat.icon}
+                  </div>
+                  <p className="font-black text-lg lg:text-xl text-forest tabular-nums leading-none">{stat.value}</p>
+                  <p className="text-muted text-[10px] font-semibold uppercase tracking-wide mt-1 leading-tight">{stat.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* RIGHT — Product image */}
@@ -129,27 +174,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Stats bar */}
-      <div className="relative z-10 bg-white/80 backdrop-blur-md border-t border-forest/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex divide-x divide-forest/10">
-            {[
-              { value: t.hero.stat1Value, label: t.hero.stat1Label },
-              { value: t.hero.stat2Value, label: t.hero.stat2Label },
-              { value: t.hero.stat3Value, label: t.hero.stat3Label },
-            ].map((stat) => (
-              <div key={stat.label} className="flex-1 py-4 lg:py-7 text-center">
-                <p className="font-black text-2xl lg:text-4xl text-forest leading-none tabular-nums">
-                  {stat.value}
-                </p>
-                <p className="text-body text-[10px] lg:text-xs mt-1.5 font-semibold uppercase tracking-[0.1em]">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
     </section>
   );
 }

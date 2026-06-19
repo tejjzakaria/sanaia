@@ -23,7 +23,7 @@ export default function Products() {
           <p className="text-muted text-base max-w-lg mx-auto">{t.products.description}</p>
         </AnimateIn>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           {PRODUCTS.map((product, i) => {
             const item = lang === "ar" ? product.ar : product.fr;
             return (
@@ -43,7 +43,7 @@ export default function Products() {
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 flex flex-col gap-2 flex-1">
+                  <div className="p-4 sm:p-6 flex flex-col gap-2 flex-1">
                     <div>
                       <h3 className="font-display text-xl font-bold text-ink leading-tight">{product.fr.name}</h3>
                       <p className="font-arabic text-muted text-sm font-medium mt-0.5">{product.ar.name}</p>
