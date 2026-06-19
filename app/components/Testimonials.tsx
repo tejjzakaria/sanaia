@@ -5,7 +5,7 @@ import { useLanguage } from "../context/LanguageContext";
 
 const VIDEOS = [
   "https://sanaia.s3.us-east-1.amazonaws.com/IMG_0928.mp4",
-  "https://sanaia.s3.us-east-1.amazonaws.com/IMG_4213.mp4",
+  "https://sanaia.s3.us-east-1.amazonaws.com/IMG_7029.mp4",
   "https://sanaia.s3.us-east-1.amazonaws.com/IMG_4214.mp4",
   "https://sanaia.s3.us-east-1.amazonaws.com/IMG_6802.mp4",
 ];
