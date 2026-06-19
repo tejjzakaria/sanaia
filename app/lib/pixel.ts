@@ -1,6 +1,6 @@
 // ── Facebook Pixel ────────────────────────────────────────────────────────
 // Set your Pixel ID here. Find it in Meta Business Suite → Events Manager.
-export const FB_PIXEL_ID = 'PASTE_YOUR_PIXEL_ID_HERE'
+export const FB_PIXEL_ID = '1265146225546338'
 
 declare global {
   interface Window {
