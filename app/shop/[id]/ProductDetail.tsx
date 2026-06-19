@@ -25,10 +25,17 @@ function CheckIcon({ color }: { color: string }) {
   );
 }
 
-function StarIcon() {
+function StarIcon({ fill = 100 }: { fill?: number }) {
+  const id = `star-fill-${fill}`;
   return (
-    <svg className="w-5 h-5 text-amber-400 fill-amber-400" viewBox="0 0 20 20">
-      <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
+    <svg className="w-5 h-5" viewBox="0 0 20 20">
+      <defs>
+        <linearGradient id={id} x1="0" x2="1" y1="0" y2="0">
+          <stop offset={`${fill}%`} stopColor="#FBBF24" />
+          <stop offset={`${fill}%`} stopColor="#D1D5DB" />
+        </linearGradient>
+      </defs>
+      <path fill={`url(#${id})`} d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
     </svg>
   );
 }
@@ -252,10 +259,10 @@ export default function ProductDetail({ product }: { product: Product }) {
 
               {/* Stars */}
               <div className="flex items-center gap-1">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <StarIcon key={i} />
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <StarIcon key={star} fill={Math.round(Math.min(100, Math.max(0, (product.rating - star + 1) * 100)))} />
                 ))}
-                <span className="text-sm text-muted ml-2 font-medium">5.0</span>
+                <span className="text-sm text-muted ml-2 font-medium">{product.rating.toFixed(1)}</span>
               </div>
 
               {/* Tagline */}

@@ -23,6 +23,7 @@ export interface Product {
   color: string;
   bg: string;
   price: string;
+  rating: number;
   packs: ProductPack[];
   fr: ProductTranslation;
   ar: ProductTranslation;
@@ -48,6 +49,7 @@ export const PRODUCTS: Product[] = [
     color: "#1A7ABF",
     bg: "rgba(26,122,191,0.08)",
     price: "219 DH",
+    rating: 4.7,
     fr: {
       name: "Collagène Marin",
       tagline: "Peau · Cheveux · Ongles · Articulations",
@@ -130,6 +132,7 @@ export const PRODUCTS: Product[] = [
     color: "#7B5EA7",
     bg: "rgba(123,94,167,0.08)",
     price: "219 DH",
+    rating: 4.7,
     fr: {
       name: "MoodCalm",
       tagline: "Soutien naturel au stress & à l'humeur",
@@ -209,6 +212,7 @@ export const PRODUCTS: Product[] = [
     color: "#C4621C",
     bg: "rgba(196,98,28,0.08)",
     price: "219 DH",
+    rating: 4.6,
     fr: {
       name: "Weight Boost",
       tagline: "Pour un poids corporel sain & naturel",
@@ -290,6 +294,7 @@ export const PRODUCTS: Product[] = [
     color: "#1A5BAF",
     bg: "rgba(26,91,175,0.08)",
     price: "219 DH",
+    rating: 4.8,
     fr: {
       name: "Prostate Supp",
       tagline: "Santé de la prostate & confort urinaire",
