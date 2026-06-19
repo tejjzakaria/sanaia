@@ -13,7 +13,7 @@ export default function ThankYouContent({ product, value }: { product?: string; 
   }, []);
 
   return (
-    <section className="bg-sage min-h-[calc(100vh-68px)] pt-[68px] flex items-center">
+    <section className="bg-sage min-h-[calc(100vh-100px)] pt-[100px] flex items-center">
       <div className="max-w-lg mx-auto px-5 sm:px-8 py-12 sm:py-24 text-center">
 
         {/* Animated check */}

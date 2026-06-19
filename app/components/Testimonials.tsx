@@ -12,7 +12,17 @@ const VIDEOS = [
 
 const DELAYS = ["delay-100", "delay-200", "delay-300", "delay-400"];
 
-function VideoCard({ src, index }: { src: string; index: number }) {
+function VideoCard({
+  src,
+  index,
+  activeRef,
+  onPlay,
+}: {
+  src: string;
+  index: number;
+  activeRef: React.MutableRefObject<HTMLVideoElement | null>;
+  onPlay: (v: HTMLVideoElement) => void;
+}) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -35,18 +45,31 @@ function VideoCard({ src, index }: { src: string; index: number }) {
     return () => observer.disconnect();
   }, []);
 
+  // Sync playing state when this video is paused externally (by another card)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const onPause = () => setPlaying(false);
+    video.addEventListener("pause", onPause);
+    return () => video.removeEventListener("pause", onPause);
+  }, []);
+
   async function toggle() {
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {
+      // Pause whatever is currently playing
+      if (activeRef.current && activeRef.current !== video) {
+        activeRef.current.pause();
+      }
       setLoading(true);
-      // Upgrade to full load on first tap if metadata-only so far
       if (video.preload !== "auto") {
         video.preload = "auto";
         video.load();
       }
       try {
         await video.play();
+        onPlay(video);
         setPlaying(true);
       } catch {
         setPlaying(false);
@@ -115,6 +138,7 @@ function VideoCard({ src, index }: { src: string; index: number }) {
 
 export default function Testimonials() {
   const { t } = useLanguage();
+  const activeRef = useRef<HTMLVideoElement | null>(null);
 
   return (
     <section className="bg-white py-28">
@@ -133,7 +157,13 @@ export default function Testimonials() {
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
           {VIDEOS.map((src, i) => (
-            <VideoCard key={src} src={src} index={i} />
+            <VideoCard
+              key={src}
+              src={src}
+              index={i}
+              activeRef={activeRef}
+              onPlay={(v) => { activeRef.current = v; }}
+            />
           ))}
         </div>
       </div>

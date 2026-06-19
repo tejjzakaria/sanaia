@@ -14,7 +14,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative min-h-screen bg-sage flex flex-col pt-[68px] overflow-hidden">
+    <section className="relative min-h-screen bg-sage flex flex-col pt-[100px] overflow-hidden">
       {/* Subtle concentric rings (decorative) */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden>
         {[440, 580, 720].map((s) => (

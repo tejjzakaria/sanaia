@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
-/* ── Font variables (switch on RTL) ──────────────────── */
+/* ── Font variables ──────────────────────────────────── */
+/* Arabic font listed first so Arabic chars always resolve to it automatically;
+   Latin chars fall through to IBM Plex Sans via browser unicode-range matching. */
 :root {
-  --active-body-font:    var(--font-ibm-plex-sans);
-  --active-display-font: var(--font-ibm-plex-sans);
+  --active-body-font:    var(--font-ibm-plex-sans-arabic), var(--font-ibm-plex-sans);
+  --active-display-font: var(--font-ibm-plex-sans-arabic), var(--font-ibm-plex-sans);
 }
 
 html[dir="rtl"] {
-  --active-body-font:    var(--font-ibm-plex-sans-arabic);
-  --active-display-font: var(--font-ibm-plex-sans-arabic);
+  --active-body-font:    var(--font-ibm-plex-sans-arabic), var(--font-ibm-plex-sans);
+  --active-display-font: var(--font-ibm-plex-sans-arabic), var(--font-ibm-plex-sans);
 }
 
 /* ── Design tokens ───────────────────────────────────── */
@@ -76,6 +78,11 @@ body {
   50%       { transform: translateY(-8px); }
 }
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 /* ── Animation utilities ─────────────────────────────── */
 .animate-fade-up    { animation: fadeUp     0.7s cubic-bezier(0.22,1,0.36,1) both; }
 .animate-fade-in    { animation: fadeIn     0.6s ease both; }
@@ -83,6 +90,7 @@ body {
 .animate-slide-right{ animation: slideRight 0.7s cubic-bezier(0.22,1,0.36,1) both; }
 .animate-scale-in   { animation: scaleIn    0.6s cubic-bezier(0.22,1,0.36,1) both; }
 .animate-float      { animation: floatY     4s ease-in-out infinite; }
+.animate-marquee    { animation: marquee   28s linear infinite; will-change: transform; }
 
 .delay-100 { animation-delay: 100ms; }
 .delay-150 { animation-delay: 150ms; }

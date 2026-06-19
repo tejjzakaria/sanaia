@@ -174,7 +174,7 @@ export default function ProductDetail({ product }: { product: Product }) {
   return (
     <div>
       {/* ── A. Breadcrumb ─────────────────────────────────────────────── */}
-      <div className="bg-sage border-b border-edge pt-[68px]">
+      <div className="bg-sage border-b border-edge pt-[100px]">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-3">
           <nav className="flex items-center gap-2 text-xs text-muted">
             <Link href="/" className="hover:text-forest transition-colors">

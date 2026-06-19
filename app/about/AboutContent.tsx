@@ -40,7 +40,7 @@ export default function AboutContent() {
   return (
     <>
       {/* ── Hero ──────────────────────────────────────────── */}
-      <section className="bg-forest pt-[68px] pb-24 lg:pb-32 overflow-hidden">
+      <section className="bg-forest pt-[100px] pb-24 lg:pb-32 overflow-hidden">
         {/* Decorative rings */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden>
           {[500, 700, 900].map((s) => (

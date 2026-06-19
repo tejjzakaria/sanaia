@@ -10,7 +10,7 @@ export default function ShopContent() {
   return (
     <>
       {/* Page hero */}
-      <section className="bg-sage pt-[68px]">
+      <section className="bg-sage pt-[100px]">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 lg:py-24 text-center">
           <p className="text-forest-mid text-xs font-bold tracking-widest uppercase mb-4">
             + SANAÏA
