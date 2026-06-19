@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import Providers from "./components/Providers";
+import FacebookPixel from "./components/FacebookPixel";
 
 const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-ibm-plex-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
       className={`${ibmPlexSans.variable} ${ibmPlexSansArabic.variable}`}
     >
       <body className="min-h-screen bg-sage text-body antialiased font-sans">
+        <FacebookPixel />
         <Providers>{children}</Providers>
       </body>
     </html>

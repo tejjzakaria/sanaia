@@ -14,10 +14,11 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <Testimonials />
         <ProblemSection />
         <Products />
         <WhySanaia />
-        <Testimonials />
+        
         <Faq />
         <CtaBanner />
       </main>

@@ -1,10 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "../../context/LanguageContext";
 import { PRODUCTS, type Product } from "../../data/products";
+import { FB } from "../../lib/pixel";
 
 /* ─── Icons ─────────────────────────────────────────────────────────────── */
 
@@ -113,6 +114,10 @@ export default function ProductDetail({ product }: { product: Product }) {
   const pack = product.packs[selectedPack];
   const relatedProducts = PRODUCTS.filter((p) => p.id !== product.id).slice(0, 3);
 
+  useEffect(() => {
+    FB.viewContent(product.fr.name, product.id);
+  }, [product.fr.name, product.id]);
+
   function handleField(field: string, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
@@ -133,6 +138,7 @@ export default function ProductDetail({ product }: { product: Product }) {
     }
     setStatus("submitting");
     setFormError(null);
+    FB.initiateCheckout(product.fr.name, pack.priceNum);
 
     try {
       const res = await fetch("/api/order", {
@@ -154,7 +160,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 
       if (!res.ok) throw new Error("failed");
 
-      router.push(`/thank-you?product=${encodeURIComponent(product.fr.name)}`);
+      router.push(`/thank-you?product=${encodeURIComponent(product.fr.name)}&value=${pack.priceNum}`);
     } catch {
       setStatus("idle");
       setFormError(

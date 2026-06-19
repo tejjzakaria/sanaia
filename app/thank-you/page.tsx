@@ -10,14 +10,14 @@ export const metadata: Metadata = {
 export default async function ThankYouPage({
   searchParams,
 }: {
-  searchParams: Promise<{ product?: string }>;
+  searchParams: Promise<{ product?: string; value?: string }>;
 }) {
-  const { product } = await searchParams;
+  const { product, value } = await searchParams;
   return (
     <>
       <Navbar />
       <main>
-        <ThankYouContent product={product} />
+        <ThankYouContent product={product} value={value ? parseInt(value) : undefined} />
       </main>
       <Footer />
     </>

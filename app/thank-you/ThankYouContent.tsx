@@ -1,9 +1,16 @@
 "use client";
 import Link from "next/link";
+import { useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
+import { FB } from "../lib/pixel";
 
-export default function ThankYouContent({ product }: { product?: string }) {
+export default function ThankYouContent({ product, value }: { product?: string; value?: number }) {
   const { t, lang } = useLanguage();
+
+  useEffect(() => {
+    if (product) FB.purchase(product, value ?? 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <section className="bg-sage min-h-[calc(100vh-68px)] pt-[68px] flex items-center">
