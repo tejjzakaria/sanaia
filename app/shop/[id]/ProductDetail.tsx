@@ -379,82 +379,96 @@ export default function ProductDetail({ product }: { product: Product }) {
                     </h3>
 
                     {/* Name */}
-                    <div>
-                      <label className="block text-xs font-bold text-body uppercase tracking-wide mb-1.5">
-                        {t.checkout.name}
-                      </label>
+                    <div className="relative">
                       <input
+                        id="field-name"
                         type="text"
                         value={form.name}
                         onChange={(e) => handleField("name", e.target.value)}
-                        placeholder={t.checkout.namePlaceholder}
-                        className={`border-2 rounded-xl px-4 py-3 w-full outline-none text-ink transition-colors focus:border-forest text-sm ${
+                        placeholder=" "
+                        className={`peer border-2 rounded-xl px-4 pt-6 pb-2 w-full outline-none text-ink transition-colors focus:border-forest text-sm bg-white ${
                           errors.name ? "border-red-400" : "border-edge"
                         }`}
                       />
+                      <label
+                        htmlFor="field-name"
+                        className="absolute left-4 top-4 text-muted text-sm transition-all duration-150 pointer-events-none peer-focus:top-1.5 peer-focus:text-[10px] peer-focus:font-bold peer-focus:text-forest peer-focus:uppercase peer-focus:tracking-wide peer-[&:not(:placeholder-shown)]:top-1.5 peer-[&:not(:placeholder-shown)]:text-[10px] peer-[&:not(:placeholder-shown)]:font-bold peer-[&:not(:placeholder-shown)]:uppercase peer-[&:not(:placeholder-shown)]:tracking-wide"
+                      >
+                        {t.checkout.name}
+                      </label>
                       {errors.name && (
                         <p className="text-red-500 text-xs mt-1">{errors.name}</p>
                       )}
                     </div>
 
                     {/* Phone */}
-                    <div>
-                      <label className="block text-xs font-bold text-body uppercase tracking-wide mb-1.5">
+                    <div className="relative">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted text-sm pointer-events-none select-none z-10">
+                        🇲🇦
+                      </span>
+                      <input
+                        id="field-phone"
+                        type="tel"
+                        dir="ltr"
+                        value={form.phone}
+                        onChange={(e) => handleField("phone", e.target.value)}
+                        placeholder=" "
+                        className={`peer border-2 rounded-xl pl-10 pr-4 pt-6 pb-2 w-full outline-none text-ink transition-colors focus:border-forest text-sm bg-white ${
+                          errors.phone ? "border-red-400" : "border-edge"
+                        }`}
+                      />
+                      <label
+                        htmlFor="field-phone"
+                        className="absolute left-10 top-4 text-muted text-sm transition-all duration-150 pointer-events-none peer-focus:top-1.5 peer-focus:text-[10px] peer-focus:font-bold peer-focus:text-forest peer-focus:uppercase peer-focus:tracking-wide peer-[&:not(:placeholder-shown)]:top-1.5 peer-[&:not(:placeholder-shown)]:text-[10px] peer-[&:not(:placeholder-shown)]:font-bold peer-[&:not(:placeholder-shown)]:uppercase peer-[&:not(:placeholder-shown)]:tracking-wide"
+                      >
                         {t.checkout.phone}
                       </label>
-                      <div className="relative">
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted text-sm font-medium pointer-events-none select-none">
-                          🇲🇦
-                        </span>
-                        <input
-                          type="tel"
-                          dir="ltr"
-                          value={form.phone}
-                          onChange={(e) => handleField("phone", e.target.value)}
-                          placeholder={t.checkout.phonePlaceholder}
-                          className={`border-2 rounded-xl pl-10 pr-4 py-3 w-full outline-none text-ink transition-colors focus:border-forest text-sm ${
-                            errors.phone ? "border-red-400" : "border-edge"
-                          }`}
-                        />
-                      </div>
                       {errors.phone && (
                         <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
                       )}
                     </div>
 
                     {/* City */}
-                    <div>
-                      <label className="block text-xs font-bold text-body uppercase tracking-wide mb-1.5">
-                        {t.checkout.city}
-                      </label>
+                    <div className="relative">
                       <input
+                        id="field-city"
                         type="text"
                         value={form.city}
                         onChange={(e) => handleField("city", e.target.value)}
-                        placeholder={t.checkout.cityPlaceholder}
-                        className={`border-2 rounded-xl px-4 py-3 w-full outline-none text-ink transition-colors focus:border-forest text-sm ${
+                        placeholder=" "
+                        className={`peer border-2 rounded-xl px-4 pt-6 pb-2 w-full outline-none text-ink transition-colors focus:border-forest text-sm bg-white ${
                           errors.city ? "border-red-400" : "border-edge"
                         }`}
                       />
+                      <label
+                        htmlFor="field-city"
+                        className="absolute left-4 top-4 text-muted text-sm transition-all duration-150 pointer-events-none peer-focus:top-1.5 peer-focus:text-[10px] peer-focus:font-bold peer-focus:text-forest peer-focus:uppercase peer-focus:tracking-wide peer-[&:not(:placeholder-shown)]:top-1.5 peer-[&:not(:placeholder-shown)]:text-[10px] peer-[&:not(:placeholder-shown)]:font-bold peer-[&:not(:placeholder-shown)]:uppercase peer-[&:not(:placeholder-shown)]:tracking-wide"
+                      >
+                        {t.checkout.city}
+                      </label>
                       {errors.city && (
                         <p className="text-red-500 text-xs mt-1">{errors.city}</p>
                       )}
                     </div>
 
                     {/* Address */}
-                    <div>
-                      <label className="block text-xs font-bold text-body uppercase tracking-wide mb-1.5">
-                        {t.checkout.address}
-                      </label>
+                    <div className="relative">
                       <textarea
-                        rows={2}
+                        id="field-address"
+                        rows={3}
                         value={form.address}
                         onChange={(e) => handleField("address", e.target.value)}
-                        placeholder={t.checkout.addressPlaceholder}
-                        className={`border-2 rounded-xl px-4 py-3 w-full outline-none text-ink transition-colors focus:border-forest resize-none text-sm ${
+                        placeholder=" "
+                        className={`peer border-2 rounded-xl px-4 pt-6 pb-2 w-full outline-none text-ink transition-colors focus:border-forest resize-none text-sm bg-white ${
                           errors.address ? "border-red-400" : "border-edge"
                         }`}
                       />
+                      <label
+                        htmlFor="field-address"
+                        className="absolute left-4 top-4 text-muted text-sm transition-all duration-150 pointer-events-none peer-focus:top-1.5 peer-focus:text-[10px] peer-focus:font-bold peer-focus:text-forest peer-focus:uppercase peer-focus:tracking-wide peer-[&:not(:placeholder-shown)]:top-1.5 peer-[&:not(:placeholder-shown)]:text-[10px] peer-[&:not(:placeholder-shown)]:font-bold peer-[&:not(:placeholder-shown)]:uppercase peer-[&:not(:placeholder-shown)]:tracking-wide"
+                      >
+                        {t.checkout.address}
+                      </label>
                       {errors.address && (
                         <p className="text-red-500 text-xs mt-1">{errors.address}</p>
                       )}
