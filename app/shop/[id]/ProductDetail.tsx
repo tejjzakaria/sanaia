@@ -673,7 +673,73 @@ export default function ProductDetail({ product }: { product: Product }) {
         </div>
       </section>
 
-      {/* ── G. FAQ accordion ──────────────────────────────────────────── */}
+      {/* ── G. Customer reviews ───────────────────────────────────────── */}
+      <section className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          {/* Header */}
+          <div className="flex flex-col sm:flex-row sm:items-end gap-4 mb-12">
+            <div className="flex-1">
+              <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: product.color }}>
+                {lang === "ar" ? "آراء العملاء" : "Avis clients"}
+              </p>
+              <h2 className="font-display font-black text-ink text-2xl lg:text-3xl">
+                {lang === "ar" ? "ماذا يقول عملاؤنا" : "Ce que disent nos clients"}
+              </h2>
+            </div>
+            <div className="flex items-center gap-3 bg-sage rounded-2xl px-5 py-3">
+              <div>
+                <p className="font-black text-4xl text-ink tabular-nums leading-none">{product.rating.toFixed(1)}</p>
+                <div className="flex gap-0.5 mt-1">
+                  {[1,2,3,4,5].map((s) => (
+                    <StarIcon key={s} fill={Math.round(Math.min(100, Math.max(0, (product.rating - s + 1) * 100)))} />
+                  ))}
+                </div>
+              </div>
+              <div className="pl-3 border-l border-edge">
+                <p className="text-sm font-semibold text-ink">{product.reviews.length * 40}+ avis</p>
+                <p className="text-xs text-muted">{lang === "ar" ? "عملاء موثوقون" : "clients vérifiés"}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Review cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {product.reviews.map((review, i) => (
+              <div key={i} className="bg-sage rounded-2xl p-5 flex flex-col gap-3 border border-transparent hover:border-edge transition-colors duration-200">
+                {/* Top row */}
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 text-white font-black text-base" style={{ backgroundColor: product.color }}>
+                    {review.name[0]}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-bold text-ink text-sm">{review.name}</p>
+                    <p className="text-[10px] text-forest-mid font-semibold uppercase tracking-wide">
+                      {lang === "ar" ? "مشتري موثق ✓" : "Achat vérifié ✓"}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Stars + date */}
+                <div className="flex items-center justify-between">
+                  <div className="flex gap-0.5">
+                    {[1,2,3,4,5].map((s) => (
+                      <StarIcon key={s} fill={Math.round(Math.min(100, Math.max(0, (review.rating - s + 1) * 100)))} />
+                    ))}
+                  </div>
+                  <span className="text-[10px] text-muted">{review.date}</span>
+                </div>
+
+                {/* Review text */}
+                <p className="text-body text-sm leading-relaxed flex-1">
+                  "{review.text}"
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── H. FAQ accordion ──────────────────────────────────────────── */}
       <section className="bg-white py-20">
         <div className="max-w-3xl mx-auto px-5 sm:px-8">
           <h2 className="font-display font-black text-ink text-2xl lg:text-3xl mb-10 text-center">{t.product.faqTitle}</h2>

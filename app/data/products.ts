@@ -35,12 +35,20 @@ export interface ProductSection {
   ar: ProductSectionContent;
 }
 
+export interface ProductReview {
+  name: string;
+  rating: number;
+  date: string;
+  text: string;
+}
+
 export interface Product {
   id: string;
   image: string;
   images: string[];
   creatives: string[];
   sections: ProductSection[];
+  reviews: ProductReview[];
   color: string;
   bg: string;
   price: string;
@@ -150,6 +158,38 @@ export const PRODUCTS: Product[] = [
           sub: "دعم شامل للمفاصل والعظام للحصول على حركة مثلى في حياتك اليومية.",
           badges: ["دعم المفاصل والعظام", "شعر وبشرة وأظافر صحية", "ببيبتيدات بحرية فاخرة", "تركيبة آمنة وفعالة"],
         },
+      },
+    ],
+    reviews: [
+      {
+        name: "Fatima",
+        rating: 5,
+        date: "Il y a 3 semaines",
+        text: "Ma peau a vraiment changé après 6 semaines ! Elle est plus lumineuse et les petites rides ont nettement diminué. Je ne m'y attendais pas aussi vite.",
+      },
+      {
+        name: "Yasmine",
+        rating: 5,
+        date: "Il y a 1 mois",
+        text: "كانت عندي مشكل مع تساقط الشعر، جربت بزاف دالحوايج بلا نتيجة. من بعد كولاجين ديال سانايا وقف التساقط والشعر ولى مالق وبريّق. عجبني مزيان!",
+      },
+      {
+        name: "Khadija",
+        rating: 5,
+        date: "Il y a 2 semaines",
+        text: "Je le prends le matin à jeun et je vois vraiment la différence. Mes ongles sont beaucoup plus solides et ma peau est plus douce et repulpée.",
+      },
+      {
+        name: "Nadia",
+        rating: 4,
+        date: "Il y a 5 semaines",
+        text: "كانت عندي ألم ف الركبة من سنين. دابا بدات نمشي مليح بزاف ف الحياة اليومية. نوصي بيه!",
+      },
+      {
+        name: "Salma",
+        rating: 5,
+        date: "Il y a 2 mois",
+        text: "Produit de qualité, livraison rapide. Résultats visibles dès le premier mois. Je le recommande à toutes mes amies !",
       },
     ],
     color: "#1A7ABF",
@@ -317,6 +357,38 @@ export const PRODUCTS: Product[] = [
         },
       },
     ],
+    reviews: [
+      {
+        name: "Amine",
+        rating: 5,
+        date: "Il y a 2 semaines",
+        text: "Je travaille sous forte pression et le stress était devenu insupportable. MoodCalm m'a vraiment aidé à retrouver mon calme sans somnolence. Je le prends depuis 3 semaines.",
+      },
+      {
+        name: "Sara",
+        rating: 5,
+        date: "Il y a 1 mois",
+        text: "ما كنتقدرش ننعس مزيان من بزاف دالشهور. من بعد 3 أسابيع ديال مود كالم، بدات ننعس بزاف مليح وكانعس مرتاح. واعر بحال!",
+      },
+      {
+        name: "Hamid",
+        rating: 5,
+        date: "Il y a 3 semaines",
+        text: "كان مزاجي بحال المية والنار، متقلب بزاف على طول النهار. من دخلت مود كالم، حسيت براسي مستوي وهادي بزاف. الفرق واضح!",
+      },
+      {
+        name: "Layla",
+        rating: 4,
+        date: "Il y a 5 semaines",
+        text: "Bon produit pour l'anxiété. Je le prends le soir et ça m'aide vraiment à me détendre avant de dormir. Effets progressifs mais réels.",
+      },
+      {
+        name: "Mehdi",
+        rating: 5,
+        date: "Il y a 6 semaines",
+        text: "Je recommande ! Ça prend 2-3 semaines pour sentir l'effet mais ça vaut vraiment la peine. Produit naturel et de bonne qualité.",
+      },
+    ],
     color: "#7B5EA7",
     bg: "rgba(123,94,167,0.08)",
     price: "219 DH",
@@ -456,6 +528,38 @@ export const PRODUCTS: Product[] = [
           sub: "وزن بوست يندمج في حياتك اليومية لدعم أهدافك ضمن نمط حياة متوازن وصحي.",
           badges: ["عافية شاملة", "طاقة طبيعية", "دعم الشهية"],
         },
+      },
+    ],
+    reviews: [
+      {
+        name: "Youssef",
+        rating: 5,
+        date: "Il y a 3 semaines",
+        text: "زدت 4 كيلو ف شهرين مع وزن بوست وماكلة مزيانة. زادت شهيتي بصح وحسيت براسي قوي وفيا طاقة. عجبني مزيان!",
+      },
+      {
+        name: "Karim",
+        rating: 5,
+        date: "Il y a 1 mois",
+        text: "J'avais du mal à manger assez pour prendre du poids. Depuis Weight Boost, j'ai vraiment faim aux repas et les résultats sont visibles sur mon corps.",
+      },
+      {
+        name: "Omar",
+        rating: 5,
+        date: "Il y a 2 mois",
+        text: "منتج واعر! كانجمعو مع رياضة المقاومة وخدام بلا فلوس. نوصي بيه لكل من باغي يكبر بصحة.",
+      },
+      {
+        name: "Soufiane",
+        rating: 4,
+        date: "Il y a 5 semaines",
+        text: "Bon résultat après 6 semaines. L'appétit a bien augmenté et je commence à voir la différence sur mon corps. Livraison rapide aussi.",
+      },
+      {
+        name: "Rachid",
+        rating: 5,
+        date: "Il y a 3 semaines",
+        text: "منتج طبيعي وعندو خدمة. هاد هي الكوتي التانية وكاملي! عيلتي كاتلاحظ التغيير بصح.",
       },
     ],
     color: "#C4621C",
@@ -632,6 +736,38 @@ export const PRODUCTS: Product[] = [
           factLabel: "حقيقة",
           fact: "الدعم الاستباقي بمكملات طبيعية مثل بروستات ساب يساعد في الحفاظ على صحة البروستاتا والراحة البولية.",
         },
+      },
+    ],
+    reviews: [
+      {
+        name: "Hassan",
+        rating: 5,
+        date: "Il y a 1 mois",
+        text: "Depuis que je prends Prostate Supp, je me lève beaucoup moins la nuit. Après 6 semaines, vraiment une grande différence dans mon confort quotidien.",
+      },
+      {
+        name: "Mohammed",
+        rating: 5,
+        date: "Il y a 5 semaines",
+        text: "كانت عندي مشاكل ف البول من سنتين. طبيبي قالي نجربو كمكمل. مرضي بزاف على النتيجة، وكاملي الكور.",
+      },
+      {
+        name: "Brahim",
+        rating: 5,
+        date: "Il y a 3 semaines",
+        text: "Produit de qualité, ingrédients naturels. Je dors beaucoup mieux la nuit et je me sens plus à l'aise dans ma vie quotidienne. Merci SANAÏA.",
+      },
+      {
+        name: "Abdelkarim",
+        rating: 5,
+        date: "Il y a 2 mois",
+        text: "منتج واعر لصحة الرجل. كانوصي بيه لجميع الرجال لي فوق 45 عام. النتائج موجودة بصح.",
+      },
+      {
+        name: "Khalid",
+        rating: 4,
+        date: "Il y a 6 semaines",
+        text: "Il faut être patient, les résultats viennent progressivement. Après un mois, je commence à ressentir une nette amélioration du confort.",
       },
     ],
     color: "#1A5BAF",
