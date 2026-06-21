@@ -16,10 +16,31 @@ export interface ProductPack {
   priceNum: number;
 }
 
+export interface ProductSectionContent {
+  headline: string;
+  sub: string;
+  points?: string[];
+  badges?: string[];
+  myth?: string;
+  mythLabel?: string;
+  fact?: string;
+  factLabel?: string;
+}
+
+export interface ProductSection {
+  image: string;
+  layout: "image-left" | "image-right";
+  variant?: "myth-fact";
+  fr: ProductSectionContent;
+  ar: ProductSectionContent;
+}
+
 export interface Product {
   id: string;
   image: string;
   images: string[];
+  creatives: string[];
+  sections: ProductSection[];
   color: string;
   bg: string;
   price: string;
@@ -45,6 +66,91 @@ export const PRODUCTS: Product[] = [
       "/sanaia-images/ChatGPT%20Image%20Jun%209%2C%202026%2C%2003_32_34%20PM.png",
       "/sanaia-images/1781292167605.png",
       "/sanaia-images/Frame%20A%20-%20Shot%201%20Start.png",
+    ],
+    creatives: [
+      "/collagen_creatives/1.jpeg",
+      "/collagen_creatives/2.jpeg",
+      "/collagen_creatives/3.jpeg",
+      "/collagen_creatives/4.jpeg",
+      "/collagen_creatives/5.jpeg",
+      "/collagen_creatives/6.jpeg",
+      "/collagen_creatives/7.jpeg",
+      "/collagen_creatives/8.jpeg",
+    ],
+    sections: [
+      {
+        image: "/collagen_creatives/1.jpeg",
+        layout: "image-right",
+        fr: {
+          headline: "Une peau radieuse commence ici",
+          sub: "Soutient l'éclat naturel et l'élasticité de la peau de l'intérieur, dès les premières semaines.",
+          points: [
+            "Éclat naturel & anti-âge visible",
+            "Réduit les signes de l'âge",
+            "Soutient cheveux & ongles",
+            "Soutien des articulations",
+          ],
+        },
+        ar: {
+          headline: "الجمال الطبيعي يبدأ من الداخل",
+          sub: "كولاجين بحري فاخر لدعم جمالك من الداخل، يُظهر نتائج ملموسة من الأسابيع الأولى.",
+          points: [
+            "بشرة أكثر نضارة وتقلل التجاعيد",
+            "شعر أقوى وأكثر كثافة",
+            "أظافر صحية وقوية",
+          ],
+        },
+      },
+      {
+        image: "/collagen_creatives/4.jpeg",
+        layout: "image-left",
+        fr: {
+          headline: "Retrouvez votre jeunesse",
+          sub: "Le collagène marin réduit visiblement les rides et ridules, et repulpe la peau progressivement.",
+          badges: ["Wild Caught Marine Source", "Non-GMO Formula", "Third-Party Tested", "Gluten & Soy Free"],
+        },
+        ar: {
+          headline: "استعيدي شبابك",
+          sub: "يقلل الكولاجين البحري من علامات الشيخوخة ويملأ البشرة بشكل تدريجي وطبيعي.",
+          badges: ["مصدر بحري نقي", "تركيبة غير معدلة وراثياً", "مختبر من جهة ثالثة", "خالٍ من الغلوتين والصويا"],
+        },
+      },
+      {
+        image: "/collagen_creatives/5.jpeg",
+        layout: "image-right",
+        fr: {
+          headline: "Des cheveux plus forts et sains",
+          sub: "Renforcés de l'intérieur grâce aux peptides de collagène marin haute biodisponibilité.",
+          points: [
+            "Nourrit les follicules capillaires",
+            "Favorise la force et la brillance",
+            "Soutient une croissance saine",
+          ],
+        },
+        ar: {
+          headline: "شعر أقوى وأكثر حيوية",
+          sub: "تقوية من الجذور بفضل ببيبتيدات الكولاجين البحري عالية التوافر البيولوجي.",
+          points: [
+            "يغذي بصيلات الشعر",
+            "يعزز القوة والبريق",
+            "يدعم نمواً صحياً",
+          ],
+        },
+      },
+      {
+        image: "/collagen_creatives/7.jpeg",
+        layout: "image-left",
+        fr: {
+          headline: "Bougez en toute confiance",
+          sub: "Un soutien complet des articulations et des os pour une mobilité optimale au quotidien.",
+          badges: ["Soutien articulations & os", "Cheveux, peau & ongles en santé", "Peptides marins premium", "Formule sûre & efficace"],
+        },
+        ar: {
+          headline: "تحرك بثقة وحيوية",
+          sub: "دعم شامل للمفاصل والعظام للحصول على حركة مثلى في حياتك اليومية.",
+          badges: ["دعم المفاصل والعظام", "شعر وبشرة وأظافر صحية", "ببيبتيدات بحرية فاخرة", "تركيبة آمنة وفعالة"],
+        },
+      },
     ],
     color: "#1A7ABF",
     bg: "rgba(26,122,191,0.08)",
@@ -129,6 +235,88 @@ export const PRODUCTS: Product[] = [
       "/sanaia-images/mood%20calm%202.png",
       "/sanaia-images/1781017538848.jpg.jpeg",
     ],
+    creatives: [
+      "/moodcalm_creatives/1.jpeg",
+      "/moodcalm_creatives/2.jpeg",
+      "/moodcalm_creatives/3.jpeg",
+      "/moodcalm_creatives/4.jpeg",
+      "/moodcalm_creatives/5.jpeg",
+      "/moodcalm_creatives/6.jpeg",
+    ],
+    sections: [
+      {
+        image: "/moodcalm_creatives/5.jpeg",
+        layout: "image-right",
+        fr: {
+          headline: "Le stress quotidien ?",
+          sub: "Retrouvez votre équilibre naturellement avec MoodCalm. Une formule adaptogène pour calmer le système nerveux sans accoutumance.",
+          points: [
+            "Calme le système nerveux",
+            "Réduit l'anxiété chronique",
+            "Favorise l'équilibre émotionnel",
+            "Sans accoutumance ni effets secondaires",
+          ],
+        },
+        ar: {
+          headline: "التوتر اليومي؟",
+          sub: "استعد توازنك بشكل طبيعي مع مود كالم. تركيبة أدابتوجينية لتهدئة الجهاز العصبي بدون إدمان.",
+          points: [
+            "يهدئ الجهاز العصبي",
+            "يقلل القلق المزمن",
+            "يعزز التوازن العاطفي",
+            "بدون إدمان أو آثار جانبية",
+          ],
+        },
+      },
+      {
+        image: "/moodcalm_creatives/6.jpeg",
+        layout: "image-left",
+        fr: {
+          headline: "Ingrédients naturels sélectionnés",
+          sub: "Valériane · Camomille · Formule avancée. Une synergie unique d'extraits naturels pour un effet apaisant puissant.",
+          points: [
+            "Valériane pour un sommeil réparateur",
+            "Camomille apaisante pour le système nerveux",
+            "Ashwagandha KSM-66® pour la gestion du stress",
+            "L-Théanine pour la clarté mentale",
+          ],
+        },
+        ar: {
+          headline: "مكونات طبيعية مختارة بعناية",
+          sub: "فاليريان · بابونج · تركيبة متقدمة. تآزر فريد من المستخلصات الطبيعية لتأثير مهدئ قوي.",
+          points: [
+            "فاليريان لنوم مريح ومنعش",
+            "بابونج مهدئ للجهاز العصبي",
+            "أشواجاندا KSM-66® لإدارة التوتر",
+            "إل-ثيانين للوضوح الذهني",
+          ],
+        },
+      },
+      {
+        image: "/moodcalm_creatives/2.jpeg",
+        layout: "image-right",
+        fr: {
+          headline: "Votre rituel quotidien pour la sérénité",
+          sub: "Un moment de calme chaque jour, pour un équilibre émotionnel durable.",
+          points: [
+            "2 gélules par jour",
+            "De préférence le soir, 1h avant le coucher",
+            "Avec un grand verre d'eau tiède",
+            "Conseil : associer à une tisane à la camomille",
+          ],
+        },
+        ar: {
+          headline: "طقسك اليومي للهدوء",
+          sub: "لحظة من السكينة كل يوم، لتوازن عاطفي دائم.",
+          points: [
+            "كبسولتان يومياً",
+            "مساءً قبل النوم بساعة",
+            "مع الماء الدافئ للاسترخاء",
+            "نصيحة: تناوله مع شاي البابونج لتعزيز التأثير",
+          ],
+        },
+      },
+    ],
     color: "#7B5EA7",
     bg: "rgba(123,94,167,0.08)",
     price: "219 DH",
@@ -208,6 +396,67 @@ export const PRODUCTS: Product[] = [
       "/sanaia-images/IMG_9214%202.JPG.jpeg",
       "/sanaia-images/weight%20boost%201.png",
       "/sanaia-images/weight%20boost%202.png",
+    ],
+    creatives: [
+      "/weightboost_creatives/1.jpeg",
+      "/weightboost_creatives/2.jpeg",
+      "/weightboost_creatives/3.jpeg",
+      "/weightboost_creatives/4.jpeg",
+      "/weightboost_creatives/5.jpeg",
+      "/weightboost_creatives/6.jpeg",
+      "/weightboost_creatives/7.jpeg",
+    ],
+    sections: [
+      {
+        image: "/weightboost_creatives/2.jpeg",
+        layout: "image-right",
+        fr: {
+          headline: "Votre corps mérite le meilleur",
+          sub: "WEIGHT BOOST vous accompagne dans votre parcours vers un corps plus sain et épanoui. Chaque objectif commence par une décision.",
+          badges: ["Ingrédients 100% naturels", "Formule complète", "Soutien à la prise de poids"],
+        },
+        ar: {
+          headline: "جسمك يستحق الأفضل",
+          sub: "وزن بوست يرافقك في رحلتك نحو جسم أكثر صحة وثقة بالنفس. كل هدف يبدأ بقرار.",
+          badges: ["مكونات 100% طبيعية", "تركيبة متكاملة", "دعم زيادة الوزن الصحية"],
+        },
+      },
+      {
+        image: "/weightboost_creatives/4.jpeg",
+        layout: "image-left",
+        fr: {
+          headline: "Soutenez votre appétit naturellement",
+          sub: "WEIGHT BOOST aide à soutenir votre appétit et votre apport nutritionnel pour atteindre vos objectifs de prise de poids sainement.",
+          points: [
+            "Stimule naturellement l'appétit",
+            "Optimise l'absorption des nutriments",
+            "Soutien nutritionnel complet · 60 gélules",
+          ],
+        },
+        ar: {
+          headline: "عزز شهيتك بشكل طبيعي",
+          sub: "وزن بوست يساعد على دعم الشهية وتحسين امتصاص المغذيات لتحقيق أهداف زيادة الوزن بصحة.",
+          points: [
+            "يحفز الشهية بشكل طبيعي",
+            "يحسن امتصاص المغذيات",
+            "دعم غذائي متكامل · 60 كبسولة",
+          ],
+        },
+      },
+      {
+        image: "/weightboost_creatives/6.jpeg",
+        layout: "image-right",
+        fr: {
+          headline: "Un style de vie sain et complet",
+          sub: "Weight Boost s'intègre à votre quotidien pour soutenir vos objectifs dans le cadre d'un mode de vie équilibré.",
+          badges: ["Bien-être global", "Énergie naturelle", "Soutien de l'appétit"],
+        },
+        ar: {
+          headline: "نمط حياة صحي متكامل",
+          sub: "وزن بوست يندمج في حياتك اليومية لدعم أهدافك ضمن نمط حياة متوازن وصحي.",
+          badges: ["عافية شاملة", "طاقة طبيعية", "دعم الشهية"],
+        },
+      },
     ],
     color: "#C4621C",
     bg: "rgba(196,98,28,0.08)",
@@ -290,6 +539,100 @@ export const PRODUCTS: Product[] = [
       "/sanaia-images/IMG_9216%202.JPG.jpeg",
       "/sanaia-images/prostate%20supp%202.png",
       "/sanaia-images/prostate%20supp.png",
+    ],
+    creatives: [
+      "/psotatesupp_creatives/1.jpeg",
+      "/psotatesupp_creatives/2.jpeg",
+      "/psotatesupp_creatives/3.jpeg",
+      "/psotatesupp_creatives/4.jpeg",
+      "/psotatesupp_creatives/5.jpeg",
+      "/psotatesupp_creatives/6.jpeg",
+      "/psotatesupp_creatives/7.jpeg",
+    ],
+    sections: [
+      {
+        image: "/psotatesupp_creatives/1.jpeg",
+        layout: "image-right",
+        fr: {
+          headline: "Vitalité Masculine, Naturellement",
+          sub: "PROSTATE SUPP soutient le bien-être de la prostate et le confort urinaire. Formule 100% naturelle pour hommes actifs.",
+          points: [
+            "Soutient la santé de la prostate",
+            "Améliore le flux urinaire",
+            "Réduit les mictions nocturnes",
+            "Confort et vitalité au quotidien",
+          ],
+          badges: ["Sans Gluten", "Sans OGM", "Sans Maïs", "Sans Lactose", "Sans Sucre"],
+        },
+        ar: {
+          headline: "حيوية رجولية طبيعية",
+          sub: "بروستات ساب يدعم صحة البروستاتا والراحة البولية. تركيبة 100% طبيعية للرجال النشيطين.",
+          points: [
+            "يدعم صحة البروستاتا",
+            "يحسن تدفق البول",
+            "يقلل التبول الليلي",
+            "راحة وحيوية في الحياة اليومية",
+          ],
+          badges: ["خالٍ من الغلوتين", "خالٍ من GMO", "خالٍ من الذرة", "خالٍ من الألبان", "خالٍ من السكر"],
+        },
+      },
+      {
+        image: "/psotatesupp_creatives/3.jpeg",
+        layout: "image-left",
+        fr: {
+          headline: "Des nuits plus paisibles, des jours plus actifs",
+          sub: "PROSTATE SUPP aide à réduire les levers nocturnes et améliore le flux urinaire pour un confort naturel et durable.",
+          points: [
+            "Réduit les levers nocturnes",
+            "Améliore le flux urinaire",
+            "Confort naturel garanti",
+          ],
+        },
+        ar: {
+          headline: "ليال أكثر راحة، أيام أكثر نشاطاً",
+          sub: "بروستات ساب يساعد على تقليل الذهاب للحمام ليلاً ويحسن تدفق البول لراحة طبيعية ودائمة.",
+          points: [
+            "يقلل التبول الليلي",
+            "يحسن تدفق البول",
+            "راحة طبيعية مضمونة",
+          ],
+        },
+      },
+      {
+        image: "/psotatesupp_creatives/5.jpeg",
+        layout: "image-right",
+        fr: {
+          headline: "Ne laissez pas l'âge définir votre bien-être",
+          sub: "60 gélules naturelles, sans gluten, sans OGM. Pour une santé prostatique optimale au quotidien, dès 40 ans.",
+          badges: ["Naturel et sûr", "Soutien ciblé", "Confort et vitalité", "Qualité premium"],
+        },
+        ar: {
+          headline: "الشيخوخة الصحية تبدأ بالاختيارات الذكية",
+          sub: "60 كبسولة طبيعية، خالية من الغلوتين، غير معدلة وراثياً. لصحة بروستاتا مثلى يومياً، اعتباراً من سن الأربعين.",
+          badges: ["طبيعي وآمن", "دعم مستهدف", "راحة وحيوية", "جودة فاخرة"],
+        },
+      },
+      {
+        image: "/psotatesupp_creatives/6.jpeg",
+        layout: "image-left",
+        variant: "myth-fact",
+        fr: {
+          headline: "Mythe ou Réalité ?",
+          sub: "",
+          mythLabel: "MYTHE",
+          myth: "Les problèmes de prostate sont une partie inévitable du vieillissement qu'on ne peut pas éviter.",
+          factLabel: "RÉALITÉ",
+          fact: "Un soutien proactif avec des compléments naturels comme Prostate Supp aide à maintenir la santé de la prostate et le confort urinaire.",
+        },
+        ar: {
+          headline: "خرافة أم حقيقة؟",
+          sub: "",
+          mythLabel: "خرافة",
+          myth: "مشاكل البروستاتا جزء طبيعي من الشيخوخة ولا يمكن تجنبها.",
+          factLabel: "حقيقة",
+          fact: "الدعم الاستباقي بمكملات طبيعية مثل بروستات ساب يساعد في الحفاظ على صحة البروستاتا والراحة البولية.",
+        },
+      },
     ],
     color: "#1A5BAF",
     bg: "rgba(26,91,175,0.08)",
