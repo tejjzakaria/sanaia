@@ -1,5 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
 
+async function sendTelegramNotification(body: Record<string, unknown>) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+  if (!token || !chatId) return;
+
+  const message = [
+    `🛒 *Nouvelle commande SANAÏA*`,
+    ``,
+    `📦 *Produit:* ${body.product} (${body.pack})`,
+    `💰 *Total:* ${body.total}`,
+    ``,
+    `👤 *Client:* ${body.name}`,
+    `📞 *Téléphone:* ${body.phone}`,
+    `🏙️ *Ville:* ${body.city}`,
+    `📍 *Adresse:* ${body.address}`,
+  ].join("\n");
+
+  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: "Markdown" }),
+  }).catch((err) => console.error("[telegram] Failed to send notification:", err));
+}
+
 export async function POST(req: NextRequest) {
   const appsScriptUrl = process.env.APPS_SCRIPT_URL;
 
@@ -34,10 +58,12 @@ export async function POST(req: NextRequest) {
         throw new Error(`Script error: ${data.error ?? "unknown"}`);
       }
 
+      await sendTelegramNotification(body);
       return NextResponse.json({ success: true });
     }
 
     if (res.status === 200) {
+      await sendTelegramNotification(body);
       return NextResponse.json({ success: true });
     }
 
