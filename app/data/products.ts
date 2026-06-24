@@ -14,6 +14,7 @@ export interface ProductPack {
   labelAr: string;
   price: string;
   priceNum: number;
+  golden?: boolean;
 }
 
 export interface ProductSectionContent {
@@ -64,7 +65,7 @@ export const PRODUCTS: Product[] = [
     image: "/sanaia-images/IMG_9215%202.JPG.jpeg",
     packs: [
       { qty: 1, label: "1 Boite",              labelAr: "علبة واحدة",               price: "219 DH", priceNum: 219 },
-      { qty: 3, label: "OFFRE OR · 2+1 OFFERT", labelAr: "العرض الذهبي · 2+1 مجاناً", price: "329 DH", priceNum: 329 },
+      { qty: 3, label: "OFFRE OR · 2+1 OFFERT", labelAr: "العرض الذهبي · 2+1 مجاناً", price: "329 DH", priceNum: 329, golden: true },
     ],
     images: [
       "/sanaia-images/IMG_9215%202.JPG.jpeg",

@@ -282,10 +282,60 @@ export default function ProductDetail({ product }: { product: Product }) {
                 <p className="text-xs font-bold text-body uppercase tracking-wide">
                   {lang === "ar" ? "اختر الباقة" : "Choisissez votre offre"}
                 </p>
-                <div className={`grid gap-2 ${product.packs.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
+                <div className={`grid gap-3 pt-2 ${product.packs.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
                   {product.packs.map((p, i) => {
                     const isSelected = selectedPack === i;
                     const saving = i > 0 ? product.packs[0].priceNum * p.qty - p.priceNum : 0;
+
+                    if (p.golden) {
+                      return (
+                        <div key={i} className="relative">
+                          {/* Saving badge */}
+                          {saving > 0 && (
+                            <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                              <span
+                                className="text-white text-[9px] font-black px-2.5 py-0.5 rounded-full whitespace-nowrap"
+                                style={{ background: "linear-gradient(135deg, #D97706, #92400E)" }}
+                              >
+                                −{saving} DH
+                              </span>
+                            </div>
+                          )}
+                          {/* Gradient-border wrapper */}
+                          <div
+                            className="p-[2px] rounded-2xl transition-all duration-200"
+                            style={{
+                              background: "linear-gradient(135deg, #FCD34D, #F59E0B, #D97706, #F59E0B, #FCD34D)",
+                              boxShadow: isSelected
+                                ? "0 0 0 3px rgba(251,191,36,0.35), 0 4px 16px rgba(217,119,6,0.25)"
+                                : "0 2px 8px rgba(217,119,6,0.2)",
+                            }}
+                          >
+                            <button
+                              onClick={() => setSelectedPack(i)}
+                              className="w-full flex flex-col items-center gap-1 rounded-[14px] py-3.5 px-2 transition-all duration-200"
+                              style={{
+                                background: isSelected
+                                  ? "linear-gradient(160deg, #FEF3C7, #FDE68A)"
+                                  : "linear-gradient(160deg, #FFFDF7, #FFFBEB)",
+                              }}
+                            >
+                              <span className="text-base leading-none">👑</span>
+                              <span className="font-black text-[10px] text-amber-800 uppercase tracking-widest leading-none">
+                                {lang === "ar" ? "العرض الذهبي" : "OFFRE OR"}
+                              </span>
+                              <span className="font-medium text-[10px] text-amber-600 leading-none">
+                                {lang === "ar" ? "2+1 مجاناً" : "2+1 OFFERT"}
+                              </span>
+                              <span className="font-black text-sm tabular-nums text-amber-900 mt-0.5">
+                                {p.price}
+                              </span>
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    }
+
                     return (
                       <button
                         key={i}
