@@ -282,7 +282,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                 <p className="text-xs font-bold text-body uppercase tracking-wide">
                   {lang === "ar" ? "اختر الباقة" : "Choisissez votre offre"}
                 </p>
-                <div className="grid grid-cols-3 gap-2">
+                <div className={`grid gap-2 ${product.packs.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
                   {product.packs.map((p, i) => {
                     const isSelected = selectedPack === i;
                     const saving = i > 0 ? product.packs[0].priceNum * p.qty - p.priceNum : 0;

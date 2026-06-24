@@ -63,9 +63,8 @@ export const PRODUCTS: Product[] = [
     id: "collagene-marin",
     image: "/sanaia-images/IMG_9215%202.JPG.jpeg",
     packs: [
-      { qty: 1, label: "1 Boite",   labelAr: "علبة واحدة",  price: "219 DH", priceNum: 219 },
-      { qty: 2, label: "2 Boites",  labelAr: "علبتان",       price: "349 DH", priceNum: 349 },
-      { qty: 3, label: "3 Boites",  labelAr: "3 علب",        price: "499 DH", priceNum: 499 },
+      { qty: 1, label: "1 Boite",              labelAr: "علبة واحدة",               price: "219 DH", priceNum: 219 },
+      { qty: 3, label: "OFFRE OR · 2+1 OFFERT", labelAr: "العرض الذهبي · 2+1 مجاناً", price: "329 DH", priceNum: 329 },
     ],
     images: [
       "/sanaia-images/IMG_9215%202.JPG.jpeg",
